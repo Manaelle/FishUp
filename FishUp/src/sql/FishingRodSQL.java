@@ -42,13 +42,13 @@ public class FishingRodSQL {
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
             PreparedStatement requete = connexion.prepareStatement("INSERT INTO FishingRod VALUES (?, ?, ?, ?, ?, ?, ?)");
-            requete.setInt(1, 1);
-            requete.setDouble(2, 1);
-            requete.setDouble(3, 2);
-            requete.setBoolean(4, false);
-            requete.setBoolean(5, false);
-            requete.setDouble(6, 1);
-            requete.setDouble(7, 2);
+            requete.setString(1, R.getRodId());
+            requete.setDouble(2, R.getcastDistance());
+            requete.setDouble(3, R.getreelSpeed());
+            requete.setBoolean(4, R.getisCasting());
+            requete.setBoolean(5, R.getisReeling());
+            requete.setDouble(6, R.getX());
+            requete.setDouble(7, R.getY());
             System.out.println(requete);
             int nombreDAjouts = requete.executeUpdate();
             System.out.println(nombreDAjouts + " enregistrement(s) ajoute(s)");
@@ -70,13 +70,23 @@ public class FishingRodSQL {
 
             PreparedStatement requete = connexion.prepareStatement("""
                                                                    UPDATE FishingRod 
-                                                                   SET castDistance=R.castDistance, 
-                                                                   reelSpeed=R.reelSpeed, 
-                                                                   isCasting=R.isCasting, 
-                                                                   isReeling=R.isReeling, 
-                                                                   castPositionX=R.castPositionX, 
-                                                                   castPositionY=R.castPositionY  
-                                                                   WHERE Rod_Id = R.Rod_Id""");
+                                                                   SET castDistance = ?, 
+                                                                   reelSpeed = ?, 
+                                                                   isCasting = ?, 
+                                                                   isReeling = ?, 
+                                                                   castPositionX = ?, 
+                                                                   castPositionY = ?,  
+                                                                   WHERE Rod_Id = ?""");
+            
+            // Lier les valeurs de l'objet FishingRod aux placeholders
+            requete.setDouble(1, R.getcastDistance());
+            requete.setDouble(2, R.getreelSpeed());
+            requete.setBoolean(3, R.getisCasting());  
+            requete.setBoolean(4, R.getisReeling()); 
+            requete.setDouble(5, R.getX());
+            requete.setDouble(6, R.getY()); 
+            requete.setString(7, R.getRodId());
+            
             System.out.println(requete);
             int nombreDeModifications = requete.executeUpdate();
             System.out.println(nombreDeModifications + " enregistrement(s) modifie(s)");
@@ -95,7 +105,8 @@ public class FishingRodSQL {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("DELETE FROM FishingRod WHERE Rod_Id = 2");
+            PreparedStatement requete = connexion.prepareStatement("DELETE FROM FishingRod WHERE Rod_Id = ?");
+            requete.setString(1, R.getRodId());
             System.out.println(requete);
             int nombreDeSuppressions = requete.executeUpdate();
             System.out.println(nombreDeSuppressions + " enregistrement(s) supprime(s)");
@@ -115,7 +126,8 @@ public class FishingRodSQL {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("SELECT * FROM FishingRod");
+            PreparedStatement requete = connexion.prepareStatement("SELECT * FROM FishingRod WHERE Rod_Id = ?");
+            requete.setString(1, R.getRodId());
             System.out.println(requete);
             ResultSet resultat = requete.executeQuery();
             OutilsJDBC.afficherResultSet(resultat);

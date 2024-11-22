@@ -110,7 +110,8 @@ public class JoueurSQL {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("SELECT * FROM Joueur");
+            PreparedStatement requete = connexion.prepareStatement("SELECT * FROM Joueur WHERE nom = ?");
+            requete.setString(1, J.getNom());
             System.out.println(requete);
             ResultSet resultat = requete.executeQuery();
             OutilsJDBC.afficherResultSet(resultat);

@@ -9,12 +9,13 @@ public class Joueur extends Entite {
     private int n_poisson;
     private boolean attrape;
 
-    public Joueur(String nom, int score, int n_poisson, boolean attrape, int x, int y) {
+    public Joueur(String nom, int score, int n_poisson, boolean attrape) {
         super();            // Call the constructor of Entité
         this.nom = nom;
         this.score = score;
         this.n_poisson = n_poisson;
         this.attrape = attrape;
+     
     }
     
     public String getNom(){
