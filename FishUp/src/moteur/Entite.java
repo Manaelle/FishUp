@@ -9,18 +9,18 @@ package moteur;
  * @author lgarciaa
  */
 public class Entite {           // Class that controls movements in the game window
-    private double x;
-    private double y;
+    private int x;
+    private int y;
 
-    public void Entite(double x, double y) {    
+    public void Entite(int x, int y) {    
         this.x = x;
         this.y = y;
     }
 
-    public void setAbscisse(double x) {
+    public void setAbscisse(int x) {
         this.x = x;
     }
-    public void setOrdonnee(double y) {
+    public void setOrdonnee(int y) {
         this.y = y;
     }
     
