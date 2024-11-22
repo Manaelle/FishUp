@@ -25,7 +25,7 @@ public class GameManager {
     }
     public GameManager() {
         this.Players = new ArrayList<>();
-        this.fishingRod = new ArrayList(); 
+        this.fishingRod = new ArrayList<>(); 
         this.fishList = new ArrayList<>();
         this.fishValue = new ArrayList<>();
         this.score = 0;
