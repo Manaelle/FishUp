@@ -7,52 +7,58 @@ public class Joueur extends Entite {
     private String nom;
     private int score;
     private int n_poisson;
-    private boolean etat;
+    private boolean attrape;
 
-    public Joueur(String nom, int score, int n_poisson, boolean etat, int x, int y) {
+    public Joueur(String nom, int score, int n_poisson, boolean attrape, int x, int y) {
         super();            // Call the constructor of Entité
         this.nom = nom;
         this.score = score;
         this.n_poisson = n_poisson;
-        this.etat = etat;
+        this.attrape = attrape;
     }
     
     public String getNom(){
         return nom;
     }
-    public String setNom(String nom){
-        return this.nom = nom;
+    public String setNom(String NewNom){
+        return this.nom = NewNom;
     }
     
     public int getScore(){
         return score;
     }
-    public int setScore(int score){
-        return this.score = score;
+    public int setScore(int NewScore){
+        return this.score = NewScore;
     }
     
     public int getN_poisson(){
         return n_poisson;
     }
-    public int setN_poisson(int n_poisson){
-        return this.n_poisson = n_poisson;
+    public int setN_poisson(int NewN_poisson){
+        return this.n_poisson = NewN_poisson;
+    }
+    
+    public void AddPoisson(boolean etat){
+        if(etat == true){
+            this.n_poisson += 1;
+        }
     }
     
     public void AddScore(int valeur_peche){
         this.score += valeur_peche;   // Je suis pas sur de l'implementation
                                       // Le score actuel va etre incremente par la valeur du peche attrape
     }
-    public boolean getEtat(){
-        return etat;
+    public boolean getAttrape(){
+        return attrape;
     }
-    public boolean setEtat(boolean etat){
-        return this.etat = etat;
+    public boolean setEtat(boolean NewAttrape){
+        return this.attrape = NewAttrape;
     }
     
     public void displayInfo() {
         System.out.println("Player Name: " + nom);
         System.out.println("Poissons attrapes: " + n_poisson);
         System.out.println("Score: " + score);
-        System.out.println("Position: (" + getAbscisse() + ", " + getOrdonee() + ")");
+        System.out.println("Position: (" + getAbscisse() + ", " + getOrdonnee() + ")");
     }
 }

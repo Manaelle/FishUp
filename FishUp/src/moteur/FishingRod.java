@@ -15,18 +15,20 @@ public class FishingRod extends Entite{
     private double castSpeed;
     private boolean isCasting;
     private boolean isReeling;
+    private String RodId;
 
-    public FishingRod(double castDistance, double reelSpeed, double castSpeed, boolean isCasting, boolean isReeling) {
+    public FishingRod(String RodId, double castDistance, double reelSpeed, double castSpeed, boolean isCasting, boolean isReeling, int x , int y) {
         super();
         this.castDistance = castDistance;
         this.reelSpeed = reelSpeed;
         this.castSpeed = castSpeed;
         this.isCasting = isCasting;
         this.isReeling = isReeling;
+        this.RodId = RodId;
     }
 
     public FishingRod() {
-        this(0.0f, 0.0f, 0.0f, false, false);
+        this("",0.0f, 0.0f, 0.0f, false, false,0,0);
     }
     public double getcastDistance(){
         return castDistance;
@@ -62,6 +64,28 @@ public class FishingRod extends Entite{
     public void cast(){
         this.isCasting =true;
     }
+    public double getX() {
+        return super.getAbscisse(); // Appelle la méthode définie dans Entite
+    }
+
+    public double getY() {
+        return super.getOrdonnee(); // Appelle la méthode définie dans Entite
+    }
+
+    public void setX(int x) {
+        super.setAbscisse(x); // Modifie la coordonnée X dans Entite
+    }
+
+    public void setY(int y) {
+        super.setOrdonnee(y); // Modifie la coordonnée Y dans Entite
+    }
+    public String getRodId(){
+        return this.RodId;
+    }
+    public String setRodId(String RodId){
+        return this.RodId = RodId;
+    }
+    
     /*public void HandleCasting(float ocean_floor){
         if( isCasting == true ){
             while(castDistance < ocean_floor){

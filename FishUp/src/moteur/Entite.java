@@ -33,7 +33,7 @@ public class Entite {           // Class that controls movements in the game win
         return x;
     }
     
-    public double getOrdonee() {
+    public double getOrdonnee() {
         return y;
     }
 
