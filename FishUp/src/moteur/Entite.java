@@ -17,10 +17,10 @@ public class Entite {           // Class that controls movements in the game win
         this.y = y;
     }
 
-    public void setAbscisse(int x) {
+    public void setX(int x) {
         this.x = x;
     }
-    public void setOrdonnee(int y) {
+    public void setY(int y) {
         this.y = y;
     }
     
@@ -29,11 +29,11 @@ public class Entite {           // Class that controls movements in the game win
         this.y += dy;
         System.out.println("Moved to position: (" + x + ", " + y + ")");
     }
-    public double getAbscisse() {
+    public double getX() {
         return x;
     }
     
-    public double getOrdonee() {
+    public double getY() {
         return y;
     }
 
