@@ -69,7 +69,7 @@ public class FishingRod extends Entite{
     }
 
     public double getY() {
-        return super.getOrdonee(); // Appelle la méthode définie dans Entite
+        return super.getOrdonnee(); // Appelle la méthode définie dans Entite
     }
 
     public void setX(int x) {
