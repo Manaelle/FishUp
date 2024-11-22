@@ -23,31 +23,37 @@ public class Jeu {
     private Pike pike1;
     private Pike pike2;
     private Hook hook;
+    private Carte carte;
     
     public Jeu() {
-        try {
-            this.decor = ImageIO.read(getClass().getResource("/resources/jungle.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //try {
+            //this.decor = ImageIO.read(getClass().getResource("/resources/jungle.png"));
+        //} catch (IOException ex) {
+            //Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
+        //}
         this.score = 0;
         this.pike1 = new Pike();
         this.pike2 = new Pike();
         this.hook = new Hook();
+        this.carte = new Carte();
+        
     }
     
     public void rendu(Graphics2D contexte) {
         //System.out.println("azeza");
         contexte.drawImage(this.decor, 0, 0, null);
         contexte.drawString("Score : " + score, 10, 20);
+        this.carte.rendu(contexte);
         this.pike1.rendu(contexte);
         this.pike2.rendu(contexte);
         this.hook.rendu(contexte);
+        
         // 1. Rendu du décor
         // 2. Rendu des sprites
         // 3. Rendu des textes
     }
     public void miseAJour() {
+        this.carte.miseAJour();
         this.pike1.miseAJour();
         this.pike2.miseAJour();
         this.hook.miseAJour();
@@ -64,7 +70,7 @@ public class Jeu {
         // 3. Gérer les interactions (collisions et autres règles)
     }
     
-    public  Hook getAvatar() {
+    public  Hook getHook() {
         return hook;   
     }
     

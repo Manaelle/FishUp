@@ -36,7 +36,7 @@ public class Pike {
     }
 
     public void miseAJour() {
-        y = y + 5;
+        x = x + 5;
     }
 
     public void rendu(Graphics2D contexte) {
@@ -44,8 +44,8 @@ public class Pike {
     }
 
     public void lancer() {
-        this.x = 15 + Math.random() * 330;
-        this.y = -27;
+        this.y = 15 + Math.random() * 330;
+        this.x = -27;
     }
 
     public double getX() {
