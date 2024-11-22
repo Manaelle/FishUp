@@ -7,12 +7,14 @@ public class Joueur extends Entite {
     private String nom;
     private int score;
     private int n_poisson;
+    private boolean etat;
 
-    public Joueur(String nom, int score, int n_poisson, int x, int y) {
+    public Joueur(String nom, int score, int n_poisson, boolean etat, int x, int y) {
         super();            // Call the constructor of Entité
         this.nom = nom;
         this.score = score;
         this.n_poisson = n_poisson;
+        this.etat = etat;
     }
     
     public String getNom(){
@@ -39,6 +41,12 @@ public class Joueur extends Entite {
     public void AddScore(int valeur_peche){
         this.score += valeur_peche;   // Je suis pas sur de l'implementation
                                       // Le score actuel va etre incremente par la valeur du peche attrape
+    }
+    public boolean getEtat(){
+        return etat;
+    }
+    public boolean setEtat(boolean etat){
+        return this.etat = etat;
     }
     
     public void displayInfo() {
