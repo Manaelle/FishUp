@@ -59,6 +59,6 @@ public class Joueur extends Entite {
         System.out.println("Player Name: " + nom);
         System.out.println("Poissons attrapes: " + n_poisson);
         System.out.println("Score: " + score);
-        System.out.println("Position: (" + getAbscisse() + ", " + getOrdonee() + ")");
+        System.out.println("Position: (" + getAbscisse() + ", " + getOrdonnee() + ")");
     }
 }
