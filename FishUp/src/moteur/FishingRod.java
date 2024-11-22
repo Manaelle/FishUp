@@ -8,8 +8,8 @@ package moteur;
  *
  * @author zzahir
  */
-public class FishingRod {
-   
+public class FishingRod extends Entite{
+    
     private double castDistance;
     private double reelSpeed;
     private double castSpeed;
@@ -17,6 +17,7 @@ public class FishingRod {
     private boolean isReeling;
 
     public FishingRod(double castDistance, double reelSpeed, double castSpeed, boolean isCasting, boolean isReeling) {
+        super();
         this.castDistance = castDistance;
         this.reelSpeed = reelSpeed;
         this.castSpeed = castSpeed;

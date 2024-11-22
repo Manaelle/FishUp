@@ -33,7 +33,13 @@ public class GameManager {
     public void startFishing(Fish fish, int value) {
         this.fishList.add(fish); 
         this.fishValue.add(value); 
-    } 
+    }
+    public ArrayList<Joueur> getPlayers(){
+        return this.Players;
+    }
+    public void addPlayer(Joueur player) {
+    this.Players.add(player); 
+    }
     /*public void attemptCatch(Fish fish) {
         for (int i = 0; i < fishList.size(); i++) {
             Fish currentFish = fishList.get(i); 
