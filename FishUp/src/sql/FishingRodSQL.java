@@ -35,19 +35,20 @@ public class FishingRodSQL {
     }
     
     //Je t'ai mis ici les 4 méthodes qui vont être importantes à coder, à toi de fustionner ça avec les bouts de code dans tes tests : 
-    public void creerfishingRod(FishingRod R){
+    public void creerFishingRod(FishingRod R){
        //TODO (va utiliser CREATE dans sa requête SQL)
         try {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("INSERT INTO FishingRod VALUES (?, ?, ?, ?, ?, ?)");
-            requete.setDouble(1, 1);
-            requete.setDouble(2, 2);
-            requete.setBoolean(3, false);
+            PreparedStatement requete = connexion.prepareStatement("INSERT INTO FishingRod VALUES (?, ?, ?, ?, ?, ?, ?)");
+            requete.setInt(1, 1);
+            requete.setDouble(2, 1);
+            requete.setDouble(3, 2);
             requete.setBoolean(4, false);
-            requete.setDouble(5, 1);
-            requete.setDouble(6, 2);
+            requete.setBoolean(5, false);
+            requete.setDouble(6, 1);
+            requete.setDouble(7, 2);
             System.out.println(requete);
             int nombreDAjouts = requete.executeUpdate();
             System.out.println(nombreDAjouts + " enregistrement(s) ajoute(s)");
@@ -67,10 +68,7 @@ public class FishingRodSQL {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("UPDATE FishingRod SET value = 4, isCaught = true WHERE fishName = 'merlu'");
-            requete.setInt(1, 4);
-            requete.setBoolean(2, true);
-            requete.setString(3, "merlu");
+            PreparedStatement requete = connexion.prepareStatement("UPDATE FishingRod SET isCasting = true WHERE Rod_Id = 1");
             System.out.println(requete);
             int nombreDeModifications = requete.executeUpdate();
             System.out.println(nombreDeModifications + " enregistrement(s) modifie(s)");
@@ -89,8 +87,7 @@ public class FishingRodSQL {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("DELETE FROM FishingRod WHERE nom = ?");
-            requete.setString(1, "merlu");
+            PreparedStatement requete = connexion.prepareStatement("DELETE FROM FishingRod WHERE Rod_Id = 2");
             System.out.println(requete);
             int nombreDeSuppressions = requete.executeUpdate();
             System.out.println(nombreDeSuppressions + " enregistrement(s) supprime(s)");
