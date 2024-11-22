@@ -8,11 +8,11 @@ package moteur;
  *
  * @author lgarciaa
  */
-public class Entite {
+public class Entite {           // Class that controls movements in the game window
     private double x;
     private double y;
 
-    public void Point(double x, double y) {
+    public void Entite(double x, double y) {    
         this.x = x;
         this.y = y;
     }
@@ -23,19 +23,30 @@ public class Entite {
     public void setOrdonnee(double y) {
         this.y = y;
     }
+    
+    public void Move(int dx, int dy){
+        this.x += dx;
+        this.y += dy;
+        System.out.println("Moved to position: (" + x + ", " + y + ")");
+    }
+    public double getAbscisse() {
+        return x;
+    }
+    
+    public double getOrdonee() {
+        return y;
+    }
 
     public double distance(Entite p) {
         return Math.sqrt((this.x - p.x) * (this.x - p.x)
                 + (this.y - p.y) * (this.y - p.y));
     }
 
-    @Override
     public void afficher() {
         System.out.println("Abscisse = " + this.x);
         System.out.println("Ordonnee = " + this.y);
     }
 
-    @Override
     public int compareTo(Object obj) {
         Entite autre = (Entite) obj;
         if (this.x < autre.x) {
@@ -47,7 +58,6 @@ public class Entite {
         }
     }
 
-    @Override
     public String toString() {
         return "(" + x + ", " + y + ')';
     }
