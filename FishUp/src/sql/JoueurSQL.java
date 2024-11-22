@@ -37,12 +37,11 @@ public class JoueurSQL {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("INSERT INTO Joueur VALUES (?, ?, ?, ?, ?)");
-            requete.setString(1, "deka3");
-            requete.setDouble(2, 21.26545);
-            requete.setDouble(3, 47.25032);
-            requete.setInt(4, 5);
-            requete.setString(5, "merlu");
+            PreparedStatement requete = connexion.prepareStatement("INSERT INTO Joueur VALUES (?, ?, ?, ?)");
+            requete.setString(1, J.getNom());
+            requete.setInt(2, J.getScore());
+            requete.setInt(2, J.getN_poisson());
+            requete.setBoolean(3, J.getAttrape());
             System.out.println(requete);
             int nombreDAjouts = requete.executeUpdate();
             System.out.println(nombreDAjouts + " enregistrement(s) ajoute(s)");
@@ -62,11 +61,16 @@ public class JoueurSQL {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("UPDATE Joueur SET position_x = 47.251032, position_y = 5.9935, poissons_attrapés = 'rascasse' WHERE nom = 'deka2'");
-            requete.setDouble(1, 47.251032);
-            requete.setDouble(2, 5.9935);
-            requete.setString(3, "rascasse");
-            requete.setString(4, "deka2");
+            PreparedStatement requete = connexion.prepareStatement("""
+                                                                   UPDATE Joueur 
+                                                                   SET score = ?, 
+                                                                   n_poissons = ?, 
+                                                                   attrape = ? 
+                                                                   WHERE nom = ?""");
+            requete.setInt(1, J.getScore());
+            requete.setInt(2, J.getN_poisson());
+            requete.setBoolean(3, J.getAttrape());
+            requete.setString(4, J.getNom());
             System.out.println(requete);
             int nombreDeModifications = requete.executeUpdate();
             System.out.println(nombreDeModifications + " enregistrement(s) modifie(s)");
@@ -86,7 +90,7 @@ public class JoueurSQL {
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
             PreparedStatement requete = connexion.prepareStatement("DELETE FROM Joueur WHERE nom = ?");
-            requete.setString(1, "deka2gf");
+            requete.setString(1, J.getNom());
             System.out.println(requete);
             int nombreDeSuppressions = requete.executeUpdate();
             System.out.println(nombreDeSuppressions + " enregistrement(s) supprime(s)");
