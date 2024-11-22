@@ -4,6 +4,10 @@
  */
 package ihm;
 
+/**
+ *
+ * @author tpereira
+ */
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -15,18 +19,18 @@ import javax.imageio.ImageIO;
  *
  * @author tpereira
  */
-public class Avatar {
+public class Hook {
     
     protected BufferedImage sprite;
     protected double x, y;
     private boolean toucheGauche;
     private boolean toucheDroite;
 
-    public Avatar() {
+    public Hook() {
         try {
             this.sprite = ImageIO.read(getClass().getResource("../resources/donkeyKong.png"));
         } catch (IOException ex) {
-            Logger.getLogger(Banane.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Pike.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.x = 170;
         this.y = 320;
