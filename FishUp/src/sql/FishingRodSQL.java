@@ -68,7 +68,15 @@ public class FishingRodSQL {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("UPDATE FishingRod SET isCasting = true WHERE Rod_Id = 1");
+            PreparedStatement requete = connexion.prepareStatement("""
+                                                                   UPDATE FishingRod 
+                                                                   SET castDistance=R.castDistance, 
+                                                                   reelSpeed=R.reelSpeed, 
+                                                                   isCasting=R.isCasting, 
+                                                                   isReeling=R.isReeling, 
+                                                                   castPositionX=R.castPositionX, 
+                                                                   castPositionY=R.castPositionY  
+                                                                   WHERE Rod_Id = R.Rod_Id""");
             System.out.println(requete);
             int nombreDeModifications = requete.executeUpdate();
             System.out.println(nombreDeModifications + " enregistrement(s) modifie(s)");
