@@ -5,9 +5,9 @@ package moteur;
  */
 
 public class Fish {
-    public String fishName; // Nom du poisson
-    public float value; // Valeur en points du poisson
-    public boolean isCaught; // Indique si le poisson a été attrapé.
+    public String fishName; 
+    public float value; 
+    public boolean isCaught;
 
     public Fish(String name, float val, boolean caught){
         this.fishName = name;
