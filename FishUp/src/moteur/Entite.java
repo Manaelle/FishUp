@@ -41,7 +41,7 @@ public class Entite {           // Class that controls movements in the game win
         return Math.sqrt((this.x - p.x) * (this.x - p.x)
                 + (this.y - p.y) * (this.y - p.y));
     }
-
+    
     public void afficher() {
         System.out.println("Abscisse = " + this.x);
         System.out.println("Ordonnee = " + this.y);

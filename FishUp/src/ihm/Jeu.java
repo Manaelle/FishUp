@@ -23,6 +23,7 @@ public class Jeu {
     private Pike pike1;
     private Pike pike2;
     private Hook hook;
+    private Boat boat;
     private Carte carte;
     
     public Jeu() {
@@ -35,6 +36,7 @@ public class Jeu {
         this.pike1 = new Pike();
         this.pike2 = new Pike();
         this.hook = new Hook();
+        this.boat = new Boat();
         this.carte = new Carte();
         
     }
@@ -47,6 +49,7 @@ public class Jeu {
         this.pike1.rendu(contexte);
         this.pike2.rendu(contexte);
         this.hook.rendu(contexte);
+        this.boat.rendu(contexte);
         
         // 1. Rendu du décor
         // 2. Rendu des sprites
