@@ -42,9 +42,9 @@ public class FishSQL {
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
             PreparedStatement requete = connexion.prepareStatement("INSERT INTO Fish VALUES (?, ?, ?)");
-            requete.setString(1, "merlu");
-            requete.setDouble(2, 2);
-            requete.setBoolean(3, false);
+            requete.setString(1, F.getFishName());
+            requete.setDouble(2, F.getValue());
+            requete.setBoolean(3, F.getIsCaught());
             System.out.println(requete);
             int nombreDAjouts = requete.executeUpdate();
             System.out.println(nombreDAjouts + " enregistrement(s) ajoute(s)");
@@ -64,10 +64,14 @@ public class FishSQL {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("UPDATE Fish SET value = 4, isCaught = true WHERE fishName = 'merlu'");
-            requete.setInt(1, 4);
-            requete.setBoolean(2, true);
-            requete.setString(3, "merlu");
+            PreparedStatement requete = connexion.prepareStatement("""
+                                                                   UPDATE Fish 
+                                                                   SET value = ?, 
+                                                                   isCaught = ?,
+                                                                   WHERE fishName = ?""");
+            requete.setDouble(1, F.getValue());
+            requete.setBoolean(2, F.getIsCaught());
+            requete.setString(3, F.getFishName());
             System.out.println(requete);
             int nombreDeModifications = requete.executeUpdate();
             System.out.println(nombreDeModifications + " enregistrement(s) modifie(s)");
@@ -86,8 +90,8 @@ public class FishSQL {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("DELETE FROM Fish WHERE nom = ?");
-            requete.setString(1, "merlu");
+            PreparedStatement requete = connexion.prepareStatement("DELETE FROM Fish WHERE fishName = ?");
+            requete.setString(1, F.getFishName());
             System.out.println(requete);
             int nombreDeSuppressions = requete.executeUpdate();
             System.out.println(nombreDeSuppressions + " enregistrement(s) supprime(s)");
@@ -107,7 +111,8 @@ public class FishSQL {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("SELECT * FROM Fish");
+            PreparedStatement requete = connexion.prepareStatement("SELECT * FROM Fish WHERE fishName = ?");
+            requete.setString(1, F.getFishName());
             System.out.println(requete);
             ResultSet resultat = requete.executeQuery();
             OutilsJDBC.afficherResultSet(resultat);
