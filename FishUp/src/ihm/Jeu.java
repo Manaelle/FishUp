@@ -101,13 +101,13 @@ public class Jeu {
     
     public boolean estTermine1() {
         // Renvoie vrai si la partie est terminée (gagnée ou perdue)
-        return this.pike1.getY()>400;
+        return this.pike1.getY()>800;
     //return false ;
     }
     
     public boolean estTermine2() {
         // Renvoie vrai si la partie est terminée (gagnée ou perdue)
-        return this.pike2.getY()>400;
+        return this.pike2.getY()>800;
     //return false ;
     }
     

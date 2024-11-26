@@ -32,11 +32,11 @@ public class Pike {
 
     public Pike() {
         try {
-            this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleu.png"));
-            this.blueFish = ImageIO.read(getClass().getResource("../resources/Poisson bleu.png"));
-            this.redFish = ImageIO.read(getClass().getResource("../resources/Poisson rouge.png"));
-            this.greenFish = ImageIO.read(getClass().getResource("../resources/Poisson vert.png"));
-            this.yellowFish = ImageIO.read(getClass().getResource("../resources/Poisson jaune.png"));
+            this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleuD.png"));
+            this.blueFish = ImageIO.read(getClass().getResource("../resources/Poisson bleuG.png"));
+            this.redFish = ImageIO.read(getClass().getResource("../resources/Poisson rougeG.png"));
+            this.greenFish = ImageIO.read(getClass().getResource("../resources/Poisson vertG.png"));
+            this.yellowFish = ImageIO.read(getClass().getResource("../resources/Poisson jauneG.png"));
         } catch (IOException ex) {
             Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,11 +49,11 @@ public class Pike {
 
     public void rendu(Graphics2D contexte) {
         contexte.drawImage(this.sprite, (int) x, (int) y, null);
-        contexte.drawImage(this.blueFish, (int) x, (int) y, null);
+        //contexte.drawImage(this.blueFish, (int) x, (int) y, null);
     }
 
     public void lancer() {
-        this.y = 96 + Math.random() * 330;
+        this.y = 96 + Math.random() * (704-sprite.getWidth());
         this.x = 96;
     }
 
