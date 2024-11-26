@@ -24,11 +24,19 @@ import javax.imageio.ImageIO;
 public class Pike {
 
     protected BufferedImage sprite;
+    protected BufferedImage blueFish;
+    protected BufferedImage redFish;
+    protected BufferedImage yellowFish;
+    protected BufferedImage greenFish;
     protected double x, y;
 
     public Pike() {
         try {
-            this.sprite = ImageIO.read(getClass().getResource("../resources/Brochet.png"));
+            this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleu.png"));
+            this.blueFish = ImageIO.read(getClass().getResource("../resources/Poisson bleu.png"));
+            this.redFish = ImageIO.read(getClass().getResource("../resources/Poisson rouge.png"));
+            this.greenFish = ImageIO.read(getClass().getResource("../resources/Poisson vert.png"));
+            this.yellowFish = ImageIO.read(getClass().getResource("../resources/Poisson jaune.png"));
         } catch (IOException ex) {
             Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -41,11 +49,12 @@ public class Pike {
 
     public void rendu(Graphics2D contexte) {
         contexte.drawImage(this.sprite, (int) x, (int) y, null);
+        contexte.drawImage(this.blueFish, (int) x, (int) y, null);
     }
 
     public void lancer() {
-        this.y = 15 + Math.random() * 330;
-        this.x = -27;
+        this.y = 96 + Math.random() * 330;
+        this.x = 96;
     }
 
     public double getX() {

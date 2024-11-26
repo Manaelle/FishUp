@@ -34,8 +34,8 @@ public class Hook {
         } catch (IOException ex) {
             Logger.getLogger(Pike.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.x = 170;
-        this.y = 320;
+        this.x = 600;
+        this.y = 400;
         this.toucheGauche = false;
         this.toucheDroite = false;
         this.toucheHaut = false;
@@ -55,17 +55,17 @@ public class Hook {
         if (this.toucheBas) {
             y -= 5;
         }
-        if (x > 800 - sprite.getWidth()) { // collision avec le bord droit de la scene
-            x = 800 - sprite.getWidth() ;
+        if (x > 1184 - sprite.getWidth()) { // collision avec le bord droit de la scene
+            x = 1184 - sprite.getWidth() ;
         }
-        if (x < 0) { // collision avec le bord gauche de la scene
-            x = 0;
+        if (x < 96) { // collision avec le bord gauche de la scene
+            x = 96;
         }
-        if (y > 429 - sprite.getWidth()) { // collision avec le bord haut de la scene
-            y = 429 - sprite.getWidth() ;
+        if (y > 800 - sprite.getWidth()) { // collision avec le bord haut de la scene
+            y = 800 - sprite.getWidth() ;
         }
-        if (y < 0) { // collision avec le bord bas de la scene
-            y = 0;
+        if (y < 96) { // collision avec le bord bas de la scene
+            y = 96;
         }
     }
 

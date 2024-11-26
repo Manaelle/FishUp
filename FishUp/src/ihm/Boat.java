@@ -26,7 +26,7 @@ public class Boat {
 
     public Boat() {
         try {
-            this.sprite = ImageIO.read(getClass().getResource("../resources/donkeyKong.png"));
+            this.sprite = ImageIO.read(getClass().getResource("../resources/bateau-peche1.png"));
         } catch (IOException ex) {
             Logger.getLogger(Pike.class.getName()).log(Level.SEVERE, null, ex);
         }
