@@ -1,9 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ihm;
+
+/**
+ *
+ * @author tpereira
+ */
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -17,22 +21,22 @@ import javax.imageio.ImageIO;
  *
  * @author guillaume.laurent
  */
-public class Banane {
+public class Pike {
 
     protected BufferedImage sprite;
     protected double x, y;
 
-    public Banane() {
+    public Pike() {
         try {
-            this.sprite = ImageIO.read(getClass().getResource("../resources/banane.png"));
+            this.sprite = ImageIO.read(getClass().getResource("../resources/Brochet.png"));
         } catch (IOException ex) {
-            Logger.getLogger(Banane.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
         }
         lancer();
     }
 
     public void miseAJour() {
-        y = y + 5;
+        x = x + 5;
     }
 
     public void rendu(Graphics2D contexte) {
@@ -40,8 +44,8 @@ public class Banane {
     }
 
     public void lancer() {
-        this.x = 15 + Math.random() * 330;
-        this.y = -27;
+        this.y = 15 + Math.random() * 330;
+        this.x = -27;
     }
 
     public double getX() {
@@ -61,4 +65,3 @@ public class Banane {
     }
 
 }
-

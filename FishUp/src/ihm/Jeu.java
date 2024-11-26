@@ -20,59 +20,65 @@ public class Jeu {
     
     private BufferedImage decor;
     private int score;
-    private Banane uneBanane1;
-    private Banane uneBanane2;
-    private Avatar unAvatar;
+    private Pike pike1;
+    private Pike pike2;
+    private Hook hook;
+    private Carte carte;
     
     public Jeu() {
-        try {
-            this.decor = ImageIO.read(getClass().getResource("/resources/jungle.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //try {
+            //this.decor = ImageIO.read(getClass().getResource("/resources/jungle.png"));
+        //} catch (IOException ex) {
+            //Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
+        //}
         this.score = 0;
-        this.uneBanane1 = new Banane();
-        this.uneBanane2 = new Banane();
-        this.unAvatar = new Avatar();
+        this.pike1 = new Pike();
+        this.pike2 = new Pike();
+        this.hook = new Hook();
+        this.carte = new Carte();
+        
     }
     
     public void rendu(Graphics2D contexte) {
         //System.out.println("azeza");
         contexte.drawImage(this.decor, 0, 0, null);
         contexte.drawString("Score : " + score, 10, 20);
-        this.uneBanane1.rendu(contexte);
-        this.uneBanane2.rendu(contexte);
-        this.unAvatar.rendu(contexte);
+        this.carte.rendu(contexte);
+        this.pike1.rendu(contexte);
+        this.pike2.rendu(contexte);
+        this.hook.rendu(contexte);
+        
         // 1. Rendu du décor
         // 2. Rendu des sprites
         // 3. Rendu des textes
     }
     public void miseAJour() {
-        this.uneBanane1.miseAJour();
-        this.uneBanane2.miseAJour();
-        this.unAvatar.miseAJour();
+        this.carte.miseAJour();
+        this.pike1.miseAJour();
+        this.pike2.miseAJour();
+        this.hook.miseAJour();
         if (collisionEntreAvatarEtBanane1()) {
             this.score += 10;
-            uneBanane1.lancer();
+            pike1.lancer();
         }
         if (collisionEntreAvatarEtBanane2()) {
             this.score += 10;
-            uneBanane2.lancer();
+            pike2.lancer();
         }
         // 1. Mise à jour de l’avatar en fonction des commandes des joueurs
         // 2. Mise à jour des autres éléments (objets, monstres, etc.)
         // 3. Gérer les interactions (collisions et autres règles)
     }
     
-    public  Avatar getAvatar() {
-        return unAvatar;   
+    public  Hook getHook() {
+        return hook;   
     }
     
     public boolean collisionEntreAvatarEtBanane1() {
-        if ((uneBanane1.getX() >= unAvatar.getX() + unAvatar.getLargeur()) // trop à droite
-                || (uneBanane1.getX() + uneBanane1.getLargeur() <= unAvatar.getX()) // trop à gauche
-                || (uneBanane1.getY() >= unAvatar.getY() + unAvatar.getHauteur()) // trop en bas
-                || (uneBanane1.getY()+ uneBanane1.getHauteur() <= unAvatar.getY())) { // trop en haut
+        if ((pike1.getX() >= hook.getX() + hook.getLargeur()) // trop à droite
+                || (pike1.getX() + pike1.getLargeur() <= hook.getX()) // trop à gauche
+                || (pike1.getY() >= hook.getY() + hook.getHauteur()) // trop en bas
+                || (pike1.getY()+ pike1 .getHauteur() <= hook.getY())) { // trop en haut
             return false;
         } else {
             return true;
@@ -80,10 +86,10 @@ public class Jeu {
     }
     
     public boolean collisionEntreAvatarEtBanane2() {
-        if ((uneBanane2.getX() >= unAvatar.getX() + unAvatar.getLargeur()) // trop à droite
-                || (uneBanane2.getX() + uneBanane2.getLargeur() <= unAvatar.getX()) // trop à gauche
-                || (uneBanane2.getY() >= unAvatar.getY() + unAvatar.getHauteur()) // trop en bas
-                || (uneBanane2.getY()+ uneBanane2.getHauteur() <= unAvatar.getY())) { // trop en haut
+        if ((pike2.getX() >= hook.getX() + hook.getLargeur()) // trop à droite
+                || (pike2.getX() + pike2.getLargeur() <= hook.getX()) // trop à gauche
+                || (pike2.getY() >= hook.getY() + hook.getHauteur()) // trop en bas
+                || (pike2.getY()+ pike2.getHauteur() <= hook.getY())) { // trop en haut
             return false;
         } else {
             return true;
@@ -92,13 +98,13 @@ public class Jeu {
     
     public boolean estTermine1() {
         // Renvoie vrai si la partie est terminée (gagnée ou perdue)
-        return this.uneBanane1.getY()>400;
+        return this.pike1.getY()>400;
     //return false ;
     }
     
     public boolean estTermine2() {
         // Renvoie vrai si la partie est terminée (gagnée ou perdue)
-        return this.uneBanane2.getY()>400;
+        return this.pike2.getY()>400;
     //return false ;
     }
     
