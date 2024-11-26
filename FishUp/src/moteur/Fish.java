@@ -6,27 +6,27 @@ package moteur;
 
 public class Fish extends Entite {
     
-    public String fishName; 
-    public double value; 
+    public int fish_id; 
+    // public double value; 
     public boolean isCaught;
 
-    public Fish(String name, float val, boolean caught){
+    public Fish(int id, boolean caught){
         super();
-        this.fishName = name;
-        this.value = val;
+        this.fish_id = id;
+        // this.value = val;
         this.isCaught = false;
     }
     
-    public void OnCaught(String fishName, double val, boolean caught ){
+    public void OnCaught(int fish_id, boolean caught ){
         if (caught == true){
-            System.out.println("Le peche " + fishName + "qui cout " + value + "a ete attrape");
+            System.out.println("Le poisson " + fish_id + "a été attrapé");
         }
     }
-    public String getFishName(){
-        return fishName;
+    public int getFish_id(){
+        return fish_id;
     }
-    public void setFishName(String newFishName){
-        this.fishName = newFishName;
+    public void setFish_id(int newFish_id){
+        this.fish_id = newFish_id;
     }
     
     /*
@@ -35,11 +35,8 @@ public class Fish extends Entite {
     }
     public void setValue(double newValue){
         this.value = newValue;
-    }
-*/
+    }*/
     
-
-
     public boolean getIsCaught(){
         return isCaught;
     }

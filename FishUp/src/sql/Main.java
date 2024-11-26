@@ -8,7 +8,7 @@ public class Main {
         FishSQL fishSQL = new FishSQL();
 
         // Exemple : Crée un nouvel objet Fish
-        Fish newFish = new Fish("Trout", 15, false);
+        Fish newFish = new Fish(1, false);
 
         // Ajoute ce poisson à la base de données
         fishSQL.creerFish(newFish);
