@@ -28,12 +28,18 @@ public class Fish extends Entite {
     public void setFishName(String newFishName){
         this.fishName = newFishName;
     }
+    
+    /*
     public double getValue(){
         return value;
     }
     public void setValue(double newValue){
         this.value = newValue;
     }
+*/
+    
+
+
     public boolean getIsCaught(){
         return isCaught;
     }
