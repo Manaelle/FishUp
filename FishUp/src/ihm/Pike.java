@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import java.util.Random;
 
 /**
  * Exemple de classe lutin
@@ -32,7 +33,7 @@ public class Pike {
 
     public Pike() {
         try {
-            this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleuD.png"));
+            //this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleuD.png"));
             this.blueFish = ImageIO.read(getClass().getResource("../resources/Poisson bleuG.png"));
             this.redFish = ImageIO.read(getClass().getResource("../resources/Poisson rougeG.png"));
             this.greenFish = ImageIO.read(getClass().getResource("../resources/Poisson vertG.png"));
@@ -40,6 +41,16 @@ public class Pike {
         } catch (IOException ex) {
             Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        Random rand = new Random();
+        int fishType = rand.nextInt(4);
+        switch(fishType){
+            case 0: this.sprite = blueFish; break;
+            case 1: this.sprite = redFish; break;
+            case 2: this.sprite = greenFish; break;
+            case 3: this.sprite = yellowFish; break;
+        }
+        
         lancer();
     }
 

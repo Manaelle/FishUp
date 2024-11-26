@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -25,6 +27,7 @@ public class Jeu {
     private Hook hook;
     private Boat boat;
     private Carte carte;
+    private List<Pike> poissons;
     
     public Jeu() {
         //try {
@@ -33,12 +36,16 @@ public class Jeu {
             //Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
         //}
         this.score = 0;
-        this.pike1 = new Pike();
-        this.pike2 = new Pike();
+        //this.pike1 = new Pike();
+        //this.pike2 = new Pike();
         this.hook = new Hook();
         this.boat = new Boat();
         this.carte = new Carte();
+        poissons = new ArrayList<>();
         
+        for (int i = 0; i < 10; i++) {
+            poissons.add(new Pike());
+        }
     }
     
     public void rendu(Graphics2D contexte) {
@@ -46,10 +53,13 @@ public class Jeu {
         contexte.drawImage(this.decor, 0, 0, null);
         contexte.drawString("Score : " + score, 10, 20);
         this.carte.rendu(contexte);
-        this.pike1.rendu(contexte);
-        this.pike2.rendu(contexte);
+        //this.pike1.rendu(contexte);
+        //this.pike2.rendu(contexte);
         this.hook.rendu(contexte);
         this.boat.rendu(contexte);
+        for (Pike poisson : poissons) {
+            poisson.rendu(contexte);
+        }
         
         // 1. Rendu du décor
         // 2. Rendu des sprites
@@ -57,17 +67,20 @@ public class Jeu {
     }
     public void miseAJour() {
         this.carte.miseAJour();
-        this.pike1.miseAJour();
-        this.pike2.miseAJour();
+        //this.pike1.miseAJour();
+        //this.pike2.miseAJour();
         this.hook.miseAJour();
-        if (collisionEntreAvatarEtBanane1()) {
-            this.score += 10;
-            pike1.lancer();
+        for (Pike poisson : poissons) {
+            poisson.miseAJour();
         }
-        if (collisionEntreAvatarEtBanane2()) {
-            this.score += 10;
-            pike2.lancer();
-        }
+//        if (collisionEntreAvatarEtBanane1()) {
+//            this.score += 10;
+//            pike1.lancer();
+//        }
+//        if (collisionEntreAvatarEtBanane2()) {
+//            this.score += 10;
+//            pike2.lancer();
+//        }
         // 1. Mise à jour de l’avatar en fonction des commandes des joueurs
         // 2. Mise à jour des autres éléments (objets, monstres, etc.)
         // 3. Gérer les interactions (collisions et autres règles)
@@ -100,15 +113,15 @@ public class Jeu {
     }
     
     public boolean estTermine1() {
-        // Renvoie vrai si la partie est terminée (gagnée ou perdue)
+         //Renvoie vrai si la partie est terminée (gagnée ou perdue)
         return this.pike1.getY()>800;
-    //return false ;
+        //return false ;
     }
     
     public boolean estTermine2() {
-        // Renvoie vrai si la partie est terminée (gagnée ou perdue)
+         //Renvoie vrai si la partie est terminée (gagnée ou perdue)
         return this.pike2.getY()>800;
-    //return false ;
+        //return false ;
     }
     
 }
