@@ -9,6 +9,7 @@ package ihm;
  * @author tpereira
  */
 
+import ihm.Hook;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class Pike {
     protected BufferedImage yellowFish;
     protected BufferedImage greenFish;
     protected double x, y;
+    protected boolean sens;
 
     public Pike() {
         try {
@@ -38,6 +40,7 @@ public class Pike {
             this.redFish = ImageIO.read(getClass().getResource("../resources/Poisson rougeG.png"));
             this.greenFish = ImageIO.read(getClass().getResource("../resources/Poisson vertG.png"));
             this.yellowFish = ImageIO.read(getClass().getResource("../resources/Poisson jauneG.png"));
+            this.sens = true;
         } catch (IOException ex) {
             Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -54,8 +57,34 @@ public class Pike {
         lancer();
     }
 
+    public void sensPoisson(){
+        try {    
+            if (sens){
+                this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleuD.png"));
+            }
+            else{
+                this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleuG.png"));
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void miseAJour() {
-        x = x + 5;
+        if (x >= 1088){
+            this.sens = false;
+            sensPoisson();
+        }
+        else if (x <= 96){
+            this.sens = true;
+            sensPoisson();
+        }
+        if(this.sens){
+            x = x + 5;
+        }
+        else{
+            x = x - 5;
+        }
     }
 
     public void rendu(Graphics2D contexte) {
