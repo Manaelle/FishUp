@@ -30,7 +30,7 @@ public class Hook {
 
     public Hook() {
         try {
-            this.sprite = ImageIO.read(getClass().getResource("../resources/donkeyKong.png"));
+            this.sprite = ImageIO.read(getClass().getResource("../resources/Hook2.png"));
         } catch (IOException ex) {
             Logger.getLogger(Pike.class.getName()).log(Level.SEVERE, null, ex);
         }
