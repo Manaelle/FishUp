@@ -35,7 +35,7 @@ public class Boat {
         // ex: if we have two players, the boats would be more spaced, if we have 3, they  would have their distance lowered
         
         this.x = 170;
-        this.y = 0;
+        this.y = -30;
     }
 
     public void miseAJour() {
@@ -48,8 +48,8 @@ public class Boat {
         if (y > 429 - sprite.getWidth()) { // collision avec le bord haut de la scene
             y = 429 - sprite.getWidth() ;
         }
-        if (y < 0) { // collision avec le bord bas de la scene
-            y = 0;
+        if (y < -30) { // collision avec le bord bas de la scene
+            y = -30;
         }
     }
 
