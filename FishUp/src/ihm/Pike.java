@@ -26,20 +26,28 @@ import java.util.Random;
 public class Pike {
 
     protected BufferedImage sprite;
-    protected BufferedImage blueFish;
-    protected BufferedImage redFish;
-    protected BufferedImage yellowFish;
-    protected BufferedImage greenFish;
+    protected BufferedImage blueFishD;
+    protected BufferedImage redFishD;
+    protected BufferedImage yellowFishD;
+    protected BufferedImage greenFishD;
+    protected BufferedImage blueFishG;
+    protected BufferedImage redFishG;
+    protected BufferedImage yellowFishG;
+    protected BufferedImage greenFishG;
     protected double x, y;
     protected boolean sens;
 
     public Pike() {
         try {
             //this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleuD.png"));
-            this.blueFish = ImageIO.read(getClass().getResource("../resources/Poisson bleuG.png"));
-            this.redFish = ImageIO.read(getClass().getResource("../resources/Poisson rougeG.png"));
-            this.greenFish = ImageIO.read(getClass().getResource("../resources/Poisson vertG.png"));
-            this.yellowFish = ImageIO.read(getClass().getResource("../resources/Poisson jauneG.png"));
+            this.blueFishD = ImageIO.read(getClass().getResource("../resources/Poisson bleuD.png"));
+            this.redFishD = ImageIO.read(getClass().getResource("../resources/Poisson rougeD.png"));
+            this.greenFishD = ImageIO.read(getClass().getResource("../resources/Poisson vertD.png"));
+            this.yellowFishD = ImageIO.read(getClass().getResource("../resources/Poisson jauneD.png"));
+            this.blueFishG = ImageIO.read(getClass().getResource("../resources/Poisson bleuG.png"));
+            this.redFishG = ImageIO.read(getClass().getResource("../resources/Poisson rougeG.png"));
+            this.greenFishG = ImageIO.read(getClass().getResource("../resources/Poisson vertG.png"));
+            this.yellowFishG = ImageIO.read(getClass().getResource("../resources/Poisson jauneG.png"));
             this.sens = true;
         } catch (IOException ex) {
             Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
@@ -48,28 +56,40 @@ public class Pike {
         Random rand = new Random();
         int fishType = rand.nextInt(4);
         switch(fishType){
-            case 0: this.sprite = blueFish; break;
-            case 1: this.sprite = redFish; break;
-            case 2: this.sprite = greenFish; break;
-            case 3: this.sprite = yellowFish; break;
+            case 0: this.sprite = blueFishD; break;
+            case 1: this.sprite = redFishD; break;
+            case 2: this.sprite = greenFishD; break;
+            case 3: this.sprite = yellowFishD; break;
         }
         
         lancer();
     }
 
     public void sensPoisson(){
-        try {    
-            if (sens){
-                this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleuD.png"));
+        //try {
+            if (this.sprite == this.blueFishD){ 
+                if (sens){
+                    this.sprite = this.blueFishD;
+                }
+                else{
+                    this.sprite = this.blueFishG;
+                }
             }
-            else{
-                this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleuG.png"));
+            if (this.sprite == this.redFishD){ 
+                if (sens){
+                    this.sprite = this.redFishD;
+                }
+                else{
+                    this.sprite = this.redFishG;
+                }
+            //else{
+                //this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleuG.png"));
             }
-        } catch (IOException ex) {
-            Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //} catch (IOException ex) {
+            //Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
+        
     }
-    
+
     public void miseAJour() {
         if (x >= 1088){
             this.sens = false;

@@ -72,6 +72,11 @@ public class Jeu {
         this.hook.miseAJour();
         for (Pike poisson : poissons) {
             poisson.miseAJour();
+            if (collisionEntreHookEtPike(poisson)){
+                this.score += 10;
+                poisson.lancer();
+            }
+            
         }
 //        if (collisionEntreAvatarEtBanane1()) {
 //            this.score += 10;
@@ -90,38 +95,38 @@ public class Jeu {
         return hook;   
     }
     
-    public boolean collisionEntreAvatarEtBanane1() {
-        if ((pike1.getX() >= hook.getX() + hook.getLargeur()) // trop à droite
-                || (pike1.getX() + pike1.getLargeur() <= hook.getX()) // trop à gauche
-                || (pike1.getY() >= hook.getY() + hook.getHauteur()) // trop en bas
-                || (pike1.getY()+ pike1 .getHauteur() <= hook.getY())) { // trop en haut
+    public boolean collisionEntreHookEtPike(Pike poisson) {
+        if ((poisson.getX() >= hook.getX() + hook.getLargeur()) // trop à droite
+                || (poisson.getX() + poisson.getLargeur() <= hook.getX()) // trop à gauche
+                || (poisson.getY() >= hook.getY() + hook.getHauteur()) // trop en bas
+                || (poisson.getY()+ poisson.getHauteur() <= hook.getY())) { // trop en haut
             return false;
         } else {
             return true;
         }
     }
     
-    public boolean collisionEntreAvatarEtBanane2() {
-        if ((pike2.getX() >= hook.getX() + hook.getLargeur()) // trop à droite
-                || (pike2.getX() + pike2.getLargeur() <= hook.getX()) // trop à gauche
-                || (pike2.getY() >= hook.getY() + hook.getHauteur()) // trop en bas
-                || (pike2.getY()+ pike2.getHauteur() <= hook.getY())) { // trop en haut
-            return false;
-        } else {
-            return true;
-        }
-    }
+//    public boolean collisionEntreAvatarEtBanane2() {
+//        if ((pike2.getX() >= hook.getX() + hook.getLargeur()) // trop à droite
+//                || (pike2.getX() + pike2.getLargeur() <= hook.getX()) // trop à gauche
+//                || (pike2.getY() >= hook.getY() + hook.getHauteur()) // trop en bas
+//                || (pike2.getY()+ pike2.getHauteur() <= hook.getY())) { // trop en haut
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
     
-    public boolean estTermine1() {
-         //Renvoie vrai si la partie est terminée (gagnée ou perdue)
-        return this.pike1.getY()>800;
-        //return false ;
-    }
-    
-    public boolean estTermine2() {
-         //Renvoie vrai si la partie est terminée (gagnée ou perdue)
-        return this.pike2.getY()>800;
-        //return false ;
-    }
+//    public boolean estTermine1() {
+//         //Renvoie vrai si la partie est terminée (gagnée ou perdue)
+//        return this.pike1.getY()>800;
+//        //return false ;
+//    }
+//    
+//    public boolean estTermine2() {
+//         //Renvoie vrai si la partie est terminée (gagnée ou perdue)
+//        return this.pike2.getY()>800;
+//        //return false ;
+//    }
     
 }

@@ -56,12 +56,12 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         this.jeu.miseAJour();
         this.jeu.rendu(contexte);
         this.jLabel1.repaint();
-        if(this.jeu.estTermine1()){
-            this.timer.stop();
-        }
-        if(this.jeu.estTermine2()){
-            this.timer.stop();
-        }
+//        if(this.jeu.estTermine1()){
+//            this.timer.stop();
+//        }
+//        if(this.jeu.estTermine2()){
+//            this.timer.stop();
+//        }
     }
     
     @Override
