@@ -36,10 +36,11 @@ public class Pike {
     protected BufferedImage greenFishG;
     protected double x, y;
     protected boolean sens;
+    protected int fishType;
 
     public Pike() {
+        Random rand = new Random();
         try {
-            //this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleuD.png"));
             this.blueFishD = ImageIO.read(getClass().getResource("../resources/Poisson bleuD.png"));
             this.redFishD = ImageIO.read(getClass().getResource("../resources/Poisson rougeD.png"));
             this.greenFishD = ImageIO.read(getClass().getResource("../resources/Poisson vertD.png"));
@@ -48,48 +49,54 @@ public class Pike {
             this.redFishG = ImageIO.read(getClass().getResource("../resources/Poisson rougeG.png"));
             this.greenFishG = ImageIO.read(getClass().getResource("../resources/Poisson vertG.png"));
             this.yellowFishG = ImageIO.read(getClass().getResource("../resources/Poisson jauneG.png"));
-            this.sens = true;
+            this.fishType = rand.nextInt(4);
+            this.sens = rand.nextBoolean();   
+            if (sens){    
+                switch(this.fishType){
+                    case 0: this.sprite = blueFishD; break;
+                    case 1: this.sprite = redFishD; break;
+                    case 2: this.sprite = greenFishD; break;
+                    case 3: this.sprite = yellowFishD; break;
+                }
+            }
+            else{
+                switch(this.fishType){
+                    case 0: this.sprite = blueFishG; break;
+                    case 1: this.sprite = redFishG; break;
+                    case 2: this.sprite = greenFishG; break;
+                    case 3: this.sprite = yellowFishG; break;
+                }
+            }
         } catch (IOException ex) {
             Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Random rand = new Random();
-        int fishType = rand.nextInt(4);
-        switch(fishType){
-            case 0: this.sprite = blueFishD; break;
-            case 1: this.sprite = redFishD; break;
-            case 2: this.sprite = greenFishD; break;
-            case 3: this.sprite = yellowFishD; break;
-        }
-        
         lancer();
     }
 
     public void sensPoisson(){
         //try {
-            if (this.sprite == this.blueFishD){ 
-                if (sens){
-                    this.sprite = this.blueFishD;
-                }
-                else{
-                    this.sprite = this.blueFishG;
+            if (sens){
+                switch(this.fishType){
+                    case 0: this.sprite = blueFishD; break;
+                    case 1: this.sprite = redFishD; break;
+                    case 2: this.sprite = greenFishD; break;
+                    case 3: this.sprite = yellowFishD; break;
                 }
             }
-            if (this.sprite == this.redFishD){ 
-                if (sens){
-                    this.sprite = this.redFishD;
+            else{
+                switch(this.fishType){
+                    case 0: this.sprite = blueFishG; break;
+                    case 1: this.sprite = redFishG; break;
+                    case 2: this.sprite = greenFishG; break;
+                    case 3: this.sprite = yellowFishG; break;
                 }
-                else{
-                    this.sprite = this.redFishG;
-                }
-            //else{
-                //this.sprite = ImageIO.read(getClass().getResource("../resources/Poisson bleuG.png"));
             }
+            
         //} catch (IOException ex) {
             //Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
         
     }
-
+    
     public void miseAJour() {
         if (x >= 1088){
             this.sens = false;
@@ -114,7 +121,12 @@ public class Pike {
 
     public void lancer() {
         this.y = 96 + Math.random() * (704-sprite.getWidth());
-        this.x = 96;
+        if(this.sens){
+            this.x = 96;
+        }
+        else{
+            this.x = 1088;
+        }
     }
 
     public double getX() {
