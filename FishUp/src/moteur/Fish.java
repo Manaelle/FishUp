@@ -7,13 +7,13 @@ package moteur;
 public class Fish extends Entite {
     
     public int fish_id; 
-    // public double value; 
+    public double value; 
     public boolean isCaught;
 
     public Fish(int id, boolean caught){
         super();
         this.fish_id = id;
-        // this.value = val;
+        this.value = 5;
         this.isCaught = false;
     }
     
@@ -29,13 +29,13 @@ public class Fish extends Entite {
         this.fish_id = newFish_id;
     }
     
-    /*
+    
     public double getValue(){
         return value;
     }
     public void setValue(double newValue){
         this.value = newValue;
-    }*/
+    }
     
     public boolean getIsCaught(){
         return isCaught;

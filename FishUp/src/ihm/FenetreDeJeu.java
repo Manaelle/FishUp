@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
+import moteur.Joueur;
+
 /**
  * Exemple de fenetre de jeu en utilisant uniquement des commandes
  *
@@ -22,7 +24,9 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
     private Graphics2D contexte;
     private JLabel jLabel1;
     private Jeu jeu;
+    private Joueur joueur1; // Apres le SQL il faut modifier pour voir les autres
     private Timer timer;
+    private int tempsRestant;
 
     public FenetreDeJeu() {
         // initialisation de la fenetre
@@ -40,12 +44,13 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         this.contexte = this.framebuffer.createGraphics();
         
         // Creation du jeu
-        this.jeu = new Jeu () ;
+        this.jeu = new Jeu (this) ;
         
         // Creation du Timer qui appelle this.actionPerformed() tous les 40 ms
         this.timer = new Timer (40, this);
         this.timer.start();
-        
+        this.tempsRestant = 10 * 1000;
+
         // Ajout d’un ecouteur clavier
         this.addKeyListener(this);
     }
@@ -56,6 +61,16 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         this.jeu.miseAJour();
         this.jeu.rendu(contexte);
         this.jLabel1.repaint();
+
+        if (tempsRestant > 0) {
+            tempsRestant -= 40; 
+        } else {
+            this.timer.stop();
+            MessageGameOver();
+            System.out.println("Game Over!");
+            return;
+        }
+
 //        if(this.jeu.estTermine1()){
 //            this.timer.stop();
 //        }
@@ -100,10 +115,27 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         }
 }   
     
+    public int getTempsRestant() {
+        return this.tempsRestant;
+    }
     
     public static void main(String[] args) {
         FenetreDeJeu fenetre = new FenetreDeJeu();
         fenetre.setVisible(true);
+    }
+
+    private void MessageGameOver(){
+        String mensagem = "Le temps est écoulé!\n" +
+                      "Score final:\n";
+                     
+
+    // Exibe a mensagem em uma caixa de diálogo
+    javax.swing.JOptionPane.showMessageDialog(this, mensagem, "Fin du jeu!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+    // Opcional: Fechar o jogo
+    System.exit(0);
+
+
     }
 
 }

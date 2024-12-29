@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Color;
+import java.awt.Font;
 
 
 /**
@@ -22,6 +24,7 @@ public class Jeu {
     
     private BufferedImage decor;
     private int score;
+    private FenetreDeJeu fenetre;
     private Pike pike1;
     private Pike pike2;
     private Hook hook;
@@ -29,12 +32,13 @@ public class Jeu {
     private Carte carte;
     private List<Pike> poissons;
     
-    public Jeu() {
+    public Jeu(FenetreDeJeu fenetre) {
         //try {
             //this.decor = ImageIO.read(getClass().getResource("/resources/jungle.png"));
         //} catch (IOException ex) {
             //Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
         //}
+        this.fenetre = fenetre;
         this.score = 0;
         //this.pike1 = new Pike();
         //this.pike2 = new Pike();
@@ -60,6 +64,13 @@ public class Jeu {
         for (Pike poisson : poissons) {
             poisson.rendu(contexte);
         }
+
+        int tempsRestant = fenetre.getTempsRestant();
+
+        contexte.setFont(new Font("Arial", Font.BOLD, 30));
+        contexte.setColor(Color.WHITE);
+        String textoTempo = "Temps restant: " + (tempsRestant / 1000) + " s";
+        contexte.drawString(textoTempo, 900, 50);
         
         // 1. Rendu du décor
         // 2. Rendu des sprites
@@ -90,6 +101,7 @@ public class Jeu {
         // 2. Mise à jour des autres éléments (objets, monstres, etc.)
         // 3. Gérer les interactions (collisions et autres règles)
     }
+    
     
     public  Hook getHook() {
         return hook;   
