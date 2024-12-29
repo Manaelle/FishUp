@@ -33,7 +33,7 @@ public class Pike {
     protected BufferedImage blueFishG;
     protected BufferedImage redFishG;
     protected BufferedImage yellowFishG;
-    protected BufferedImage greenFishG;
+    protected BufferedImage greenFishG; 
     protected double x, y;
     protected boolean sens;
     protected int fishType;

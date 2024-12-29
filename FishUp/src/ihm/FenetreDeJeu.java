@@ -24,7 +24,6 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
     private Graphics2D contexte;
     private JLabel jLabel1;
     private Jeu jeu;
-    private Joueur joueur1; // Apres le SQL il faut modifier pour voir les autres
     private Timer timer;
     private int tempsRestant;
 
@@ -66,7 +65,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
             tempsRestant -= 40; 
         } else {
             this.timer.stop();
-            MessageGameOver();
+            MessageGameOver(jeu.getScore());
             System.out.println("Game Over!");
             return;
         }
@@ -124,18 +123,13 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         fenetre.setVisible(true);
     }
 
-    private void MessageGameOver(){
+    private void MessageGameOver(int score){
         String mensagem = "Le temps est écoulé!\n" +
-                      "Score final:\n";
+                      "Score final:\n" + score;
                      
+        javax.swing.JOptionPane.showMessageDialog(this, mensagem, "Fin du jeu!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-    // Exibe a mensagem em uma caixa de diálogo
-    javax.swing.JOptionPane.showMessageDialog(this, mensagem, "Fin du jeu!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
-    // Opcional: Fechar o jogo
-    System.exit(0);
-
-
+        System.exit(0);
     }
 
 }
