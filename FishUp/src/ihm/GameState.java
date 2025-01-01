@@ -5,10 +5,7 @@
 package ihm;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- *
- * @author zzahir
- */
+
 public class GameState {
      private ConcurrentHashMap<Integer, PlayerState> players = new ConcurrentHashMap<>(); // Tracks all player states
 
@@ -37,3 +34,50 @@ public class GameState {
         }
     }
 }
+
+// GameState.java
+/*package ihm;
+
+import java.util.concurrent.ConcurrentHashMap;
+
+public class GameState {
+    private ConcurrentHashMap<Integer, PlayerState> players = new ConcurrentHashMap<>();
+
+    public void updateFromClient(int clientId, String input) {
+        PlayerState state = players.computeIfAbsent(clientId, id -> new PlayerState());
+
+        switch (input) {
+            case "MOVE_UP":
+                state.moveHookUp();
+                break;
+            case "MOVE_DOWN":
+                state.moveHookDown();
+                break;
+            case "MOVE_LEFT":
+                state.moveHookLeft();
+                break;
+            case "MOVE_RIGHT":
+                state.moveHookRight();
+                break;
+        }
+    }
+
+    public String serialize() {
+        StringBuilder sb = new StringBuilder();
+        for (int clientId : players.keySet()) {
+            PlayerState state = players.get(clientId);
+            sb.append("Player ")
+              .append(clientId)
+              .append(": Hook Position: (")
+              .append(state.getHookX())
+              .append(", ")
+              .append(state.getHookY())
+              .append(")\n");
+        }
+        return sb.toString();
+    }
+
+    public ConcurrentHashMap<Integer, PlayerState> getPlayers() {
+        return players;
+    }
+}*/

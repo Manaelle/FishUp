@@ -8,6 +8,7 @@ package ihm;
  *
  * @author zzahir
  */
+
 public class PlayerState {
     private int hookX = 0; // X position of the hook
     private int hookY = 0; // Y position of the hook

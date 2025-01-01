@@ -7,9 +7,7 @@ import java.util.List;
 import java.awt.Color;
 import java.awt.Font;
 
-/**
- * Main game logic class
- */
+
 public class Jeu {
     private BufferedImage decor;
     private int score;
@@ -49,19 +47,29 @@ public class Jeu {
     }
 
     // Update the game state based on the server input
-    public void updateFromServer(String serverState) {
-        players.clear(); // Clear the current state
-        String[] lines = serverState.split("\n");
-        for (String line : lines) {
-            if (line.startsWith("Player")) {
+   public void updateFromServer(String serverState) {
+    players.clear(); // Clear the current state
+    String[] lines = serverState.split("\n");
+    for (String line : lines) {
+        if (line.startsWith("Player")) {
+            try {
                 String[] parts = line.split(":");
-                String[] position = parts[1].trim().replace("Hook Position: (", "").replace(")", "").split(",");
-                int x = Integer.parseInt(position[0].trim());
-                int y = Integer.parseInt(position[1].trim());
-                players.add(new PlayerState(x, y));
+                String[] position = parts[1].trim()
+                    .replace("Hook Position: (", "")
+                    .replace(")", "")
+                    .split(",");
+                if (position.length == 2) { // Ensure two coordinates are provided
+                    int x = Integer.parseInt(position[0].trim());
+                    int y = Integer.parseInt(position[1].trim());
+                    players.add(new PlayerState(x, y));
+                }
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                System.err.println("Error parsing server state: " + line);
             }
         }
     }
+}
+
 
     public void rendu(Graphics2D contexte) {
         // Draw the background (decor)
@@ -111,3 +119,113 @@ public class Jeu {
                 || poisson.getY() + poisson.getHauteur() <= hook.getY());
     }
 }
+
+// Jeu.java
+/*package ihm;
+
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.Color;
+import java.awt.Font;
+
+public class Jeu {
+    private BufferedImage decor;
+    private int score;
+    private FenetreDeJeu fenetre;
+    private Hook hook;
+    private Boat boat;
+    private Carte carte;
+    private List<Pike> poissons;
+    private List<PlayerState> players;
+    private GameServer gameserver;
+
+    public Jeu(FenetreDeJeu fenetre) {
+        this.fenetre = fenetre;
+        initializeGame();
+    }
+
+    private void initializeGame() {
+        this.score = 0;
+        this.hook = new Hook();
+        this.boat = new Boat();
+        this.carte = new Carte();
+        this.poissons = new ArrayList<>();
+        this.players = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            poissons.add(new Pike());
+        }
+    }
+
+    public void updateFromServer(String serverState) {
+        players.clear();
+        String[] lines = serverState.split("\n");
+        for (String line : lines) {
+            if (line.startsWith("Player")) {
+                try {
+                    String[] parts = line.split(":");
+                    String[] position = parts[1].trim()
+                        .replace("Hook Position: (", "")
+                        .replace(")", "")
+                        .split(",");
+                    if (position.length == 2) {
+                        int x = Integer.parseInt(position[0].trim());
+                        int y = Integer.parseInt(position[1].trim());
+                        players.add(new PlayerState(x, y));
+                    }
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    System.err.println("Error parsing server state: " + line);
+                }
+            }
+        }
+    }
+
+    public void rendu(Graphics2D contexte) {
+        this.carte.rendu(contexte);
+        for (PlayerState player : players) {
+            contexte.setColor(Color.YELLOW);
+            contexte.fillOval(player.getHookX(), player.getHookY(), 20, 20);
+        }
+        this.boat.rendu(contexte);
+        for (Pike poisson : poissons) {
+            poisson.rendu(contexte);
+        }
+        if (fenetre != null) {
+            int tempsRestant = fenetre.getTempsRestant();
+            contexte.setFont(new Font("Arial", Font.BOLD, 24));
+            contexte.setColor(Color.WHITE);
+            contexte.drawString("Temps restant : " + (tempsRestant / 1000) + " s", 900, 50);
+            contexte.setFont(contexte.getFont().deriveFont(18f));
+            contexte.drawString("Score Actuel : " + score, 900, 80);
+        }
+    }
+
+    public void miseAJour() {
+        this.carte.miseAJour();
+        this.hook.miseAJour();
+        for (Pike poisson : poissons) {
+            poisson.miseAJour();
+            if (collisionEntreHookEtPike(poisson)) {
+                this.score += 10;
+                poisson.lancer();
+            }
+        }
+    }
+
+    public Hook getHook() {
+        return hook;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    private boolean collisionEntreHookEtPike(Pike poisson) {
+        return !(poisson.getX() >= hook.getX() + hook.getLargeur()
+                || poisson.getX() + poisson.getLargeur() <= hook.getX()
+                || poisson.getY() >= hook.getY() + hook.getHauteur()
+                || poisson.getY() + poisson.getHauteur() <= hook.getY());
+    }
+}*/
