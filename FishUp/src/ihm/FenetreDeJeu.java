@@ -10,7 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
-
+import java.io.PrintWriter;
+import javax.swing.*;
 import moteur.Joueur;
 
 /**
@@ -26,6 +27,29 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
     private Jeu jeu;
     private Timer timer;
     private int tempsRestant;
+    private GameServer gameserver;
+    private PrintWriter serverOut; // To communicate with the server
+    
+    public FenetreDeJeu(GameServer gameserver) {
+        this.gameserver = gameserver;
+        initUI();
+        this.jeu = new Jeu(gameserver); // Initialize Jeu
+    }
+    public FenetreDeJeu(PrintWriter out) {
+        this.serverOut = out;
+        initUI();
+    }
+    private void initUI() {
+        this.setSize(1280, 800);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void sendToServer(String message) {
+        if (serverOut != null) {
+            serverOut.println(message);
+        }
+    }
 
     public FenetreDeJeu() {
         // initialisation de la fenetre
@@ -130,6 +154,11 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         javax.swing.JOptionPane.showMessageDialog(this, mensagem, "Fin du jeu!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
         System.exit(0);
+    }
+    public void updateFromServer(String serverState) {
+        // Parse the server state and update the game logic
+        jeu.updateFromServer(serverState);
+        repaint(); // Trigger a redraw of the screen
     }
 
 }

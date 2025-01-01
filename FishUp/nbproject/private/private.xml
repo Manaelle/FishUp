@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/ihm/Hook.java</file>
             <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/ihm/FenetreDeJeu.java</file>
             <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/ihm/Jeu.java</file>
-            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/ihm/JeuInterface.java</file>
-            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/moteur/JeuMoteur.java</file>
-            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/moteur/GameManager.java</file>
+            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/ihm/Carte.java</file>
+            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/ihm/Boat.java</file>
         </group>
     </open-files>
 </project-private>
