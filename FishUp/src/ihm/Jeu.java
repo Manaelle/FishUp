@@ -87,7 +87,12 @@ public class Jeu {
         for (Pike poisson : poissons) {
             poisson.miseAJour();
             if (collisionEntreHookEtPike(poisson)){
-                this.score += 10;
+                switch(poisson.getFishType()){
+                    case 0: this.score += 5; break;
+                    case 1: this.score += 10; break;
+                    case 2: this.score += 15; break;
+                    case 3: this.score += 20; break;
+                }
                 poisson.lancer();
             }
             

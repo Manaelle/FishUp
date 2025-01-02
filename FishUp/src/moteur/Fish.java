@@ -13,7 +13,6 @@ public class Fish extends Entite {
     public Fish(int id, boolean caught){
         super();
         this.fish_id = id;
-        this.value = 5;
         this.isCaught = false;
     }
     
