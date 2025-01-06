@@ -33,20 +33,21 @@ public class FishSQL {
         this.user = "etudiant";
         this.motdepasse = "YTDTvj9TR3CDYCmP";
     }
-    /*
-    //Je t'ai mis ici les 4 méthodes qui vont être importantes à coder, à toi de fustionner ça avec les bouts de code dans tes tests : 
+ 
+    //créer un poisson 
     public void creerFish(Pike F){
        //TODO (va utiliser CREATE dans sa requête SQL)
         try {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("INSERT INTO Fish VALUES (?, ?, ?, ?)");
+            PreparedStatement requete = connexion.prepareStatement("INSERT INTO Fish VALUES (?, ?, ?, ?, ?, ?)");
             requete.setInt(1, F.getFishType());
-            requete.setDouble(2, 0);
-            requete.setBytes(3, F.getIsCaught());
             requete.setDouble(2, F.getValue());
-            requete.setBoolean(3, F.getIsCaught());
+            //requete.setBytes(3, 0);
+            requete.setBoolean(4, F.getSens());
+            requete.setDouble(5, F.getX());
+            requete.setDouble(6, F.getY());
             System.out.println(requete);
             int nombreDAjouts = requete.executeUpdate();
             System.out.println(nombreDAjouts + " enregistrement(s) ajoute(s)");
@@ -58,7 +59,7 @@ public class FishSQL {
             ex.printStackTrace();
         }
 
-    }*/
+    }
     /*
      public void modifierFish(Pike F){
        //TODO (va utiliser UPDATE dans sa requête SQL)

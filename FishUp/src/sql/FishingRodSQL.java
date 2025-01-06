@@ -1,11 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sql;
 
 /**
@@ -34,7 +26,7 @@ public class FishingRodSQL {
         this.motdepasse = "YTDTvj9TR3CDYCmP";
     }
     
-    //Je t'ai mis ici les 4 méthodes qui vont être importantes à coder, à toi de fustionner ça avec les bouts de code dans tes tests : 
+    //Créer un hamecon
     public void creerFishingRod(FishingRod R){
        //TODO (va utiliser CREATE dans sa requête SQL)
         try {

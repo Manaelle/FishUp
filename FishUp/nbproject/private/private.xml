@@ -5,6 +5,7 @@
         <group>
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/sql/JoueurSQL.java</file>
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/resources/tileSetMinecraft32x32.png</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/ihm/Pike.java</file>
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/ihm/FenetreDeJeu.java</file>
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/resources/BrochetD.png</file>
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/ihm/Hook.java</file>
@@ -22,12 +23,6 @@
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/ihm/Carte.java</file>
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/moteur/Fish.java</file>
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/moteur/JeuMoteur.java</file>
-            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/ihm/Hook.java</file>
-            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/ihm/FenetreDeJeu.java</file>
-            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/ihm/Jeu.java</file>
-            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/ihm/JeuInterface.java</file>
-            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/moteur/JeuMoteur.java</file>
-            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp/FishUp/src/moteur/GameManager.java</file>
         </group>
     </open-files>
 </project-private>

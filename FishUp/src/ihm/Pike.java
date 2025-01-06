@@ -37,6 +37,7 @@ public class Pike {
     protected double x, y;
     protected boolean sens;
     protected int fishType;
+    protected int value;
 
     public Pike() {
         Random rand = new Random();
@@ -99,6 +100,11 @@ public class Pike {
     public boolean getSens() {
     return this.sens;
 }
+    
+    public int getValue() {
+    return this.value;
+}
+    
 
     public void miseAJour() {
         if (x >= 1088){
