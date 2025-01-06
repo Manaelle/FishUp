@@ -16,6 +16,7 @@ package sql;
 import java.sql.*;
 import outils.OutilsJDBC;
 import ihm.Pike;
+import java.io.IOException;
 
 public class FishSQL {
     
@@ -35,7 +36,7 @@ public class FishSQL {
     }
  
     //créer un poisson 
-    public void creerFish(Pike F){
+    public void creerFish(Pike F) throws IOException{
        //TODO (va utiliser CREATE dans sa requête SQL)
         try {
 
@@ -44,7 +45,7 @@ public class FishSQL {
             PreparedStatement requete = connexion.prepareStatement("INSERT INTO Fish VALUES (?, ?, ?, ?, ?, ?)");
             requete.setInt(1, F.getFishType());
             requete.setDouble(2, F.getValue());
-            //requete.setBytes(3, 0);
+            requete.setBytes(5,F.imageToBytes(F.getSprite())); // Convertir l'image en bytes
             requete.setBoolean(4, F.getSens());
             requete.setDouble(5, F.getX());
             requete.setDouble(6, F.getY());
