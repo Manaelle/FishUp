@@ -43,8 +43,8 @@ public class FishSQL {
 
             PreparedStatement requete = connexion.prepareStatement("INSERT INTO Fish VALUES (?, ?, ?)");
             requete.setInt(1, F.getFish_id());
-            // requete.setDouble(2, F.getValue());
-            requete.setBoolean(2, F.getIsCaught());
+            requete.setDouble(2, F.getValue());
+            requete.setBoolean(3, F.getIsCaught());
             System.out.println(requete);
             int nombreDAjouts = requete.executeUpdate();
             System.out.println(nombreDAjouts + " enregistrement(s) ajoute(s)");

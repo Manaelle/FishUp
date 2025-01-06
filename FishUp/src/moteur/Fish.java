@@ -10,11 +10,11 @@ public class Fish extends Entite {
     public double value; 
     public boolean isCaught;
 
-    public Fish(int id, boolean caught){
+    public Fish(int id, double val, boolean caught){
         super();
         this.fish_id = id;
-        this.value = 5;
-        this.isCaught = false;
+        this.value = val;
+        this.isCaught = caught;
     }
     
     public void OnCaught(int fish_id, boolean caught ){

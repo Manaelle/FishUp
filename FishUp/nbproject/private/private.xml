@@ -3,13 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Z:/Mes%20documents/FishUp/FishUp/src/ihm/Carte.java</file>
-            <file>file:/Z:/Mes%20documents/FishUp/FishUp/src/ihm/Boat.java</file>
-            <file>file:/Z:/Mes%20documents/FishUp/FishUp/src/ihm/Pike.java</file>
-            <file>file:/Z:/Mes%20documents/FishUp/FishUp/src/ihm/Hook.java</file>
-            <file>file:/Z:/Mes%20documents/FishUp/FishUp/src/moteur/GameManager.java</file>
-            <file>file:/Z:/Mes%20documents/FishUp/FishUp/src/ihm/Jeu.java</file>
-            <file>file:/Z:/Mes%20documents/FishUp/FishUp/src/ihm/FenetreDeJeu.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/sql/JoueurSQL.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/resources/tileSetMinecraft32x32.png</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/ihm/FenetreDeJeu.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/resources/BrochetD.png</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/ihm/Hook.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/resources/Brochet.png</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/sql/Main.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/sql/FishSQL.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/moteur/GameManager.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/resources/Hook2.png</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/resources/BrochetG.png</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/sql/FishingRodSQL.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/resources/Hook.png</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/moteur/Entite.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/moteur/FishingRod.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/moteur/Joueur.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/ihm/Carte.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/moteur/Fish.java</file>
+            <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/moteur/JeuMoteur.java</file>
         </group>
     </open-files>
 </project-private>

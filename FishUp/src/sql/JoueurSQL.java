@@ -40,8 +40,8 @@ public class JoueurSQL {
             PreparedStatement requete = connexion.prepareStatement("INSERT INTO Joueur VALUES (?, ?, ?, ?)");
             requete.setString(1, J.getNom());
             requete.setInt(2, J.getScore());
-            requete.setInt(2, J.getN_poisson());
-            requete.setBoolean(3, J.getAttrape());
+            requete.setInt(3, J.getN_poisson());
+            requete.setBoolean(4, J.getAttrape());
             System.out.println(requete);
             int nombreDAjouts = requete.executeUpdate();
             System.out.println(nombreDAjouts + " enregistrement(s) ajoute(s)");
