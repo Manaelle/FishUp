@@ -18,7 +18,7 @@ public class Fish extends Entite {
     
     public void OnCaught(int fish_id, boolean caught ){
         if (caught == true){
-            System.out.println("Le poisson " + fish_id + "a été attrapé");
+            System.out.println("Le poisson " + fish_id + "a ete attrape");
         }
     }
     public int getFish_id(){

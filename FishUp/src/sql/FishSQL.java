@@ -15,7 +15,7 @@ package sql;
 
 import java.sql.*;
 import outils.OutilsJDBC;
-import moteur.Fish;
+import ihm.Pike;
 
 public class FishSQL {
     
@@ -33,18 +33,20 @@ public class FishSQL {
         this.user = "etudiant";
         this.motdepasse = "YTDTvj9TR3CDYCmP";
     }
-    
+    /*
     //Je t'ai mis ici les 4 méthodes qui vont être importantes à coder, à toi de fustionner ça avec les bouts de code dans tes tests : 
-    public void creerFish(Fish F){
+    public void creerFish(Pike F){
        //TODO (va utiliser CREATE dans sa requête SQL)
         try {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
-            PreparedStatement requete = connexion.prepareStatement("INSERT INTO Fish VALUES (?, ?, ?)");
-            requete.setInt(1, F.getFish_id());
-            // requete.setDouble(2, F.getValue());
-            requete.setBoolean(2, F.getIsCaught());
+            PreparedStatement requete = connexion.prepareStatement("INSERT INTO Fish VALUES (?, ?, ?, ?)");
+            requete.setInt(1, F.getFishType());
+            requete.setDouble(2, 0);
+            requete.setBytes(3, F.getIsCaught());
+            requete.setDouble(2, F.getValue());
+            requete.setBoolean(3, F.getIsCaught());
             System.out.println(requete);
             int nombreDAjouts = requete.executeUpdate();
             System.out.println(nombreDAjouts + " enregistrement(s) ajoute(s)");
@@ -56,9 +58,9 @@ public class FishSQL {
             ex.printStackTrace();
         }
 
-    }
-    
-     public void modifierFish(Fish F){
+    }*/
+    /*
+     public void modifierFish(Pike F){
        //TODO (va utiliser UPDATE dans sa requête SQL)
         try {
 
@@ -66,11 +68,11 @@ public class FishSQL {
 
             PreparedStatement requete = connexion.prepareStatement("""
                                                                    UPDATE Fish 
-                                                                   SET isCaught = ?,
+                                                                   SET                                                                   isCaught = ?,
                                                                    WHERE fish_id = ?""");
-            // requete.setDouble(1, F.getValue());
-            requete.setBoolean(1, F.getIsCaught());
-            requete.setInt(2, F.getFish_id());
+            requete.setDouble(1, F.getValue());
+            requete.setBoolean(2, F.getIsCaught());
+            requete.setInt(3, F.getFish_id());
             System.out.println(requete);
             int nombreDeModifications = requete.executeUpdate();
             System.out.println(nombreDeModifications + " enregistrement(s) modifie(s)");
@@ -82,15 +84,16 @@ public class FishSQL {
             ex.printStackTrace();
         }
     }
+     */
      
-     public void supprimerFish(Fish F){
+     public void supprimerFish(Pike F){
        //TODO (va utiliser DELETE dans sa requête SQL)
         try {
 
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
             PreparedStatement requete = connexion.prepareStatement("DELETE FROM Fish WHERE fish_id = ?");
-            requete.setInt(1, F.getFish_id());
+            requete.setInt(1, F.getFishType());
             System.out.println(requete);
             int nombreDeSuppressions = requete.executeUpdate();
             System.out.println(nombreDeSuppressions + " enregistrement(s) supprime(s)");
@@ -103,7 +106,7 @@ public class FishSQL {
         }
     }
      
-     public void voirFish(Fish F){
+     public void voirFish(Pike F){
        //TODO (va utiliser SELECT dans sa requête SQL)
        //Sur celui-ci je t'ai fait un exemple, tu vois ? on utilise les attributs pour la connection ! Plus propre non ? :)
         try {
@@ -111,7 +114,7 @@ public class FishSQL {
             Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
 
             PreparedStatement requete = connexion.prepareStatement("SELECT * FROM Fish WHERE fish_id = ?");
-            requete.setInt(1, F.getFish_id());
+            requete.setInt(1, F.getFishType());
             System.out.println(requete);
             ResultSet resultat = requete.executeQuery();
             OutilsJDBC.afficherResultSet(resultat);
