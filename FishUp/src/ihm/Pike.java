@@ -12,6 +12,8 @@ package ihm;
 import ihm.Hook;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,6 +75,26 @@ public class Pike {
         }
         lancer();
     }
+    public byte[] imageToBytes(BufferedImage image) throws IOException {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    ImageIO.write(image, "png", baos);
+    return baos.toByteArray();
+}
+
+public BufferedImage bytesToImage(byte[] imageData) throws IOException {
+    ByteArrayInputStream bais = new ByteArrayInputStream(imageData);
+    return ImageIO.read(bais);
+}
+
+public Pike(int id, double x, double y, boolean sens, int fishType, BufferedImage sprite) {
+    this.x = x;
+    this.y = y;
+    this.sens = sens;
+    this.fishType = fishType;
+    this.sprite = sprite;
+    this.sens =sens;
+}
+
 
     public void sensPoisson(){
         //try {
