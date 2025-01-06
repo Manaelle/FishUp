@@ -33,7 +33,7 @@ public class Pike {
     protected BufferedImage blueFishG;
     protected BufferedImage redFishG;
     protected BufferedImage yellowFishG;
-    protected BufferedImage greenFishG;
+    protected BufferedImage greenFishG; 
     protected double x, y;
     protected boolean sens;
     protected int fishType;
@@ -107,10 +107,20 @@ public class Pike {
             sensPoisson();
         }
         if(this.sens){
-            x = x + 5;
+            switch(this.fishType){
+                case 0: x = x + 5; break;
+                case 1: x = x + 10; break;
+                case 2: x = x + 13; break;
+                case 3: x = x + 15; break;
+            }
         }
         else{
-            x = x - 5;
+            switch(this.fishType){
+                case 0: x = x - 5; break;
+                case 1: x = x - 10; break;
+                case 2: x = x - 13; break;
+                case 3: x = x - 15; break;
+            }
         }
     }
 
@@ -120,7 +130,9 @@ public class Pike {
     }
 
     public void lancer() {
+        Random rand = new Random();
         this.y = 96 + Math.random() * (704-sprite.getWidth());
+        this.fishType = rand.nextInt(4);
         if(this.sens){
             this.x = 96;
         }
@@ -137,6 +149,10 @@ public class Pike {
         return y;
     }
     
+    public int getFishType() {
+        return fishType;
+    }
+
     public double getLargeur() {
         return sprite.getHeight();
     }

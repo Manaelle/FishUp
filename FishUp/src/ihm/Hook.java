@@ -44,16 +44,16 @@ public class Hook {
 
     public void miseAJour() {
         if (this.toucheGauche) {
-            x -= 5;
+            x -= 8;
         }
         if (this.toucheDroite) {
-            x += 5;
+            x += 8;
         }
         if (this.toucheHaut) {
-            y += 5;
+            y += 8;
         }
         if (this.toucheBas) {
-            y -= 5;
+            y -= 8;
         }
         if (x > 1184 - sprite.getWidth()) { // collision avec le bord droit de la scene
             x = 1184 - sprite.getWidth() ;

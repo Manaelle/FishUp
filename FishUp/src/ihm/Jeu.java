@@ -54,8 +54,8 @@ public class Jeu {
     
     public void rendu(Graphics2D contexte) {
         //System.out.println("azeza");
-        contexte.drawImage(this.decor, 0, 0, null);
-        contexte.drawString("Score : " + score, 10, 20);
+        //contexte.drawImage(this.decor, 0, 0, null);
+        //contexte.drawString("Score : " + score, 10, 20);
         this.carte.rendu(contexte);
         //this.pike1.rendu(contexte);
         //this.pike2.rendu(contexte);
@@ -67,11 +67,14 @@ public class Jeu {
 
         int tempsRestant = fenetre.getTempsRestant();
 
-        contexte.setFont(new Font("Arial", Font.BOLD, 30));
+        contexte.setFont(new Font("Arial", Font.BOLD, 24));
         contexte.setColor(Color.WHITE);
-        String textoTempo = "Temps restant: " + (tempsRestant / 1000) + " s";
-        contexte.drawString(textoTempo, 900, 50);
-        
+        String textTemps = "Temps restant : " + (tempsRestant / 1000) + " s";
+        contexte.drawString(textTemps, 900, 50);
+        contexte.setFont(contexte.getFont().deriveFont(18f));
+        String textScore = "Score Actuel : " + (score);
+        contexte.drawString(textScore, 900, 80);
+
         // 1. Rendu du décor
         // 2. Rendu des sprites
         // 3. Rendu des textes
@@ -84,7 +87,12 @@ public class Jeu {
         for (Pike poisson : poissons) {
             poisson.miseAJour();
             if (collisionEntreHookEtPike(poisson)){
-                this.score += 10;
+                switch(poisson.getFishType()){
+                    case 0: this.score += 5; break;
+                    case 1: this.score += 10; break;
+                    case 2: this.score += 15; break;
+                    case 3: this.score += 20; break;
+                }
                 poisson.lancer();
             }
             
@@ -107,6 +115,10 @@ public class Jeu {
         return hook;   
     }
     
+    public  int getScore() {
+        return score;   
+    }
+
     public boolean collisionEntreHookEtPike(Pike poisson) {
         if ((poisson.getX() >= hook.getX() + hook.getLargeur()) // trop à droite
                 || (poisson.getX() + poisson.getLargeur() <= hook.getX()) // trop à gauche
