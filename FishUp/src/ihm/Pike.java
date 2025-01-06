@@ -96,7 +96,10 @@ public class Pike {
             //Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
         
     }
-    
+    public boolean getSens() {
+    return this.sens;
+}
+
     public void miseAJour() {
         if (x >= 1088){
             this.sens = false;
