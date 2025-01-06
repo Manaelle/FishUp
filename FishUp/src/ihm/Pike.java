@@ -126,6 +126,9 @@ public Pike(int id, double x, double y, boolean sens, int fishType, BufferedImag
     public int getValue() {
     return this.value;
 }
+    public BufferedImage getSprite(){
+        return this.sprite;
+    }
     
 
     public void miseAJour() {
