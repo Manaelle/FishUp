@@ -1,45 +1,53 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ihm;
 
-/**
- *
- * @author tpereira
- */
-
-import ihm.Hook;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.sql.*;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import java.util.Random;
 
-/**
- * Exemple de classe lutin
- *
- * @author guillaume.laurent
- */
 public class Pike {
 
-    protected BufferedImage sprite;
-    protected BufferedImage blueFishD;
-    protected BufferedImage redFishD;
-    protected BufferedImage yellowFishD;
-    protected BufferedImage greenFishD;
-    protected BufferedImage blueFishG;
-    protected BufferedImage redFishG;
-    protected BufferedImage yellowFishG;
-    protected BufferedImage greenFishG; 
-    protected double x, y;
-    protected boolean sens;
-    protected int fishType;
+    private static final String DB_URL = "jdbc:mariadb://nemrod.ens2m.fr:3306/2024_2025_s1_vs2_tp2_fish_up";
+    private static final String DB_USER = "etudiant";
+    private static final String DB_PASSWORD = "YTDTvj9TR3CDYCmP";
 
-    public Pike() {
+    private int id;
+    private int fishType;
+    private double x, y;
+    private boolean sens;
+    private BufferedImage sprite;
+
+    private BufferedImage blueFishD, redFishD, yellowFishD, greenFishD;
+    private BufferedImage blueFishG, redFishG, yellowFishG, greenFishG;
+
+    // Constructeur avec ID uniquement
+    public Pike(int id) {
+        this.id = id;
         Random rand = new Random();
+        this.fishType = rand.nextInt(4);
+        this.sens = rand.nextBoolean();
+        loadImages();
+        setSprite();
+        lancer();
+    }
+
+    // Constructeur complet
+    public Pike(int id, double x, double y, boolean sens, int fishType) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.sens = sens;
+        this.fishType = fishType;
+        loadImages();
+        setSprite();
+    }
+
+    // Chargement des images des poissons
+    private void loadImages() {
         try {
             this.blueFishD = ImageIO.read(getClass().getResource("../resources/Poisson bleuD.png"));
             this.redFishD = ImageIO.read(getClass().getResource("../resources/Poisson rougeD.png"));
@@ -49,96 +57,138 @@ public class Pike {
             this.redFishG = ImageIO.read(getClass().getResource("../resources/Poisson rougeG.png"));
             this.greenFishG = ImageIO.read(getClass().getResource("../resources/Poisson vertG.png"));
             this.yellowFishG = ImageIO.read(getClass().getResource("../resources/Poisson jauneG.png"));
-            this.fishType = rand.nextInt(4);
-            this.sens = rand.nextBoolean();   
-            if (sens){    
-                switch(this.fishType){
-                    case 0: this.sprite = blueFishD; break;
-                    case 1: this.sprite = redFishD; break;
-                    case 2: this.sprite = greenFishD; break;
-                    case 3: this.sprite = yellowFishD; break;
-                }
-            }
-            else{
-                switch(this.fishType){
-                    case 0: this.sprite = blueFishG; break;
-                    case 1: this.sprite = redFishG; break;
-                    case 2: this.sprite = greenFishG; break;
-                    case 3: this.sprite = yellowFishG; break;
-                }
-            }
         } catch (IOException ex) {
-            Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Pike.class.getName()).log(Level.SEVERE, null, ex);
         }
-        lancer();
     }
 
-    public void sensPoisson(){
-        //try {
-            if (sens){
-                switch(this.fishType){
-                    case 0: this.sprite = blueFishD; break;
-                    case 1: this.sprite = redFishD; break;
-                    case 2: this.sprite = greenFishD; break;
-                    case 3: this.sprite = yellowFishD; break;
-                }
+    // Mise à jour de l'image en fonction du type et de la direction
+    private void setSprite() {
+        if (sens) {
+            switch (fishType) {
+                case 0 -> sprite = blueFishD;
+                case 1 -> sprite = redFishD;
+                case 2 -> sprite = greenFishD;
+                case 3 -> sprite = yellowFishD;
             }
-            else{
-                switch(this.fishType){
-                    case 0: this.sprite = blueFishG; break;
-                    case 1: this.sprite = redFishG; break;
-                    case 2: this.sprite = greenFishG; break;
-                    case 3: this.sprite = yellowFishG; break;
-                }
+        } else {
+            switch (fishType) {
+                case 0 -> sprite = blueFishG;
+                case 1 -> sprite = redFishG;
+                case 2 -> sprite = greenFishG;
+                case 3 -> sprite = yellowFishG;
             }
-            
-        //} catch (IOException ex) {
-            //Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
-        
+        }
     }
-    
+
+    // Mise à jour de la position
     public void miseAJour() {
-        if (x >= 1088){
-            this.sens = false;
-            sensPoisson();
+        if (x >= 1088) {
+            sens = false;
+            setSprite();
+        } else if (x <= 96) {
+            sens = true;
+            setSprite();
         }
-        else if (x <= 96){
-            this.sens = true;
-            sensPoisson();
-        }
-        if(this.sens){
-            switch(this.fishType){
-                case 0: x = x + 5; break;
-                case 1: x = x + 10; break;
-                case 2: x = x + 13; break;
-                case 3: x = x + 15; break;
+
+        if (sens) {
+            switch (fishType) {
+                case 0 -> x += 5;
+                case 1 -> x += 10;
+                case 2 -> x += 13;
+                case 3 -> x += 15;
             }
-        }
-        else{
-            switch(this.fishType){
-                case 0: x = x - 5; break;
-                case 1: x = x - 10; break;
-                case 2: x = x - 13; break;
-                case 3: x = x - 15; break;
+        } else {
+            switch (fishType) {
+                case 0 -> x -= 5;
+                case 1 -> x -= 10;
+                case 2 -> x -= 13;
+                case 3 -> x -= 15;
             }
         }
     }
 
+    // Insérer ou mettre à jour dans la base de données
+    public void insertOrUpdateInDB() {
+        String checkQuery = "SELECT COUNT(*) FROM fish WHERE id = ?";
+        String insertQuery = "INSERT INTO fish (id, fishType, x, y, sens) VALUES (?, ?, ?, ?, ?)";
+        String updateQuery = "UPDATE fish SET fishType = ?, x = ?, y = ?, sens = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
+
+            checkStmt.setInt(1, id);
+            ResultSet rs = checkStmt.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                // Mise à jour si le poisson existe
+                try (PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
+                    updateStmt.setInt(1, fishType);
+                    updateStmt.setDouble(2, x);
+                    updateStmt.setDouble(3, y);
+                    updateStmt.setBoolean(4, sens);
+                    updateStmt.setInt(5, id);
+                    updateStmt.executeUpdate();
+                }
+            } else {
+                // Insertion si le poisson n'existe pas
+                try (PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
+                    insertStmt.setInt(1, id);
+                    insertStmt.setInt(2, fishType);
+                    insertStmt.setDouble(3, x);
+                    insertStmt.setDouble(4, y);
+                    insertStmt.setBoolean(5, sens);
+                    insertStmt.executeUpdate();
+                    System.out.println("Fish inserted into the database: ID=" + id);
+                }
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Suppression de la base de données
+    public void deleteFromDB() {
+        String query = "DELETE FROM fish WHERE id = ?";
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Affichage du poisson
     public void rendu(Graphics2D contexte) {
-        contexte.drawImage(this.sprite, (int) x, (int) y, null);
-        //contexte.drawImage(this.blueFish, (int) x, (int) y, null);
+        contexte.drawImage(sprite, (int) x, (int) y, null);
     }
 
+    // Réinitialiser la position du poisson
     public void lancer() {
         Random rand = new Random();
-        this.y = 96 + Math.random() * (704-sprite.getWidth());
-        this.fishType = rand.nextInt(4);
-        if(this.sens){
-            this.x = 96;
-        }
-        else{
-            this.x = 1088;
-        }
+        this.y = 96 + rand.nextDouble() * 704;
+        this.x = sens ? 96 : 1088;
+    }
+
+    // Getters pour la largeur et la hauteur
+    public double getLargeur() {
+        return sprite != null ? sprite.getWidth() : 0;
+    }
+
+    public double getHauteur() {
+        return sprite != null ? sprite.getHeight() : 0;
+    }
+
+    // Getters
+    public int getId() {
+        return id;
+    }
+
+    public int getFishType() {
+        return fishType;
     }
 
     public double getX() {
@@ -148,17 +198,8 @@ public class Pike {
     public double getY() {
         return y;
     }
-    
-    public int getFishType() {
-        return fishType;
-    }
 
-    public double getLargeur() {
-        return sprite.getHeight();
+    public boolean getSens() {
+        return sens;
     }
-
-    public double getHauteur() {
-        return sprite.getWidth();
-    }
-
 }

@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/sql/JoueurSQL.java</file>
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/resources/tileSetMinecraft32x32.png</file>
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/ihm/FenetreDeJeu.java</file>
@@ -22,6 +23,12 @@
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/ihm/Carte.java</file>
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/moteur/Fish.java</file>
             <file>file:/Z:/Mes%20documents/GitHub/FishUp/FishUp/src/moteur/JeuMoteur.java</file>
+=======
+            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp_MP/FishUp/FishUp/src/sql/Main.java</file>
+            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp_MP/FishUp/FishUp/src/ihm/Jeu.java</file>
+            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp_MP/FishUp/FishUp/src/ihm/Pike.java</file>
+            <file>file:/Z:/Mes%20documents/inof2/Fish_Up/FishUp_MP/FishUp/FishUp/src/sql/FishSQL.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>

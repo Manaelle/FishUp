@@ -48,7 +48,6 @@ public class FishSQL {
             System.out.println(requete);
             int nombreDAjouts = requete.executeUpdate();
             System.out.println(nombreDAjouts + " enregistrement(s) ajoute(s)");
-
             requete.close();
             connexion.close();
 
