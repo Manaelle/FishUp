@@ -139,7 +139,7 @@ public class Pike {
                     insertStmt.setDouble(4, y);
                     insertStmt.setBoolean(5, sens);
                     insertStmt.executeUpdate();
-                    System.out.println("Fish inserted into the database: ID=" + id);
+                    System.out.println("Fish inserted into the database: ID =" + id);
                 }
                 
             }
