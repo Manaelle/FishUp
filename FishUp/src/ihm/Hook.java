@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import sql.*;
 
 /**
  *
@@ -27,8 +28,9 @@ public class Hook {
     private boolean toucheDroite;
     private boolean toucheHaut;
     private boolean toucheBas;
+    private int ID;
 
-    public Hook() {
+    public Hook(int ID) {
         try {
             this.sprite = ImageIO.read(getClass().getResource("../resources/Hook2.png"));
         } catch (IOException ex) {
@@ -40,7 +42,10 @@ public class Hook {
         this.toucheDroite = false;
         this.toucheHaut = false;
         this.toucheBas = false;
+        this.ID = ID;
     }
+    
+    
 
     public void miseAJour() {
         if (this.toucheGauche) {
@@ -84,10 +89,16 @@ public class Hook {
         this.toucheBas = haut;
 }
     
-    public void setBas(boolean bas) {
+        public void setBas(boolean bas) {
         this.toucheHaut = bas;
 }
+
     
+    public int getHook_id() {
+        return ID;
+    }
+    
+
     public double getX() {
         return x;
     }
@@ -95,7 +106,14 @@ public class Hook {
     public double getY() {
         return y;
     }
-    
+/*
+    public void mettreAJourCoordonnees() {
+        HookSQL hookSQL = new HookSQL(); // Crée une instance de HookSQL
+        double[] coords = hookSQL.voirHookXY(ID); // Appelle voirHookXY
+        this.x = coords[0];
+        this.y = coords[1];
+    }
+    */
     public double getLargeur() {
         return sprite.getHeight();
     }
