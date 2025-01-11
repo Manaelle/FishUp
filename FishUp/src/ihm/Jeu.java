@@ -135,7 +135,7 @@ public class Jeu {
         poissons.addAll(poissonsRelances);
 
         // Synchroniser les poissons pour tous les joueurs
-        HookSQL hookSQL = new HookSQL();
+        // HookSQL hookSQL = new HookSQL();
         if (hookSQL.isMaster(this.hook)) { 
             // Le joueur maître met à jour tous les poissons dans la base
             for (Pike poisson : poissons) {
@@ -143,7 +143,9 @@ public class Jeu {
             }
         } else {
             // Les joueurs non maîtres synchronisent leur liste locale avec la base
-            
+            for (Pike poisson : poissonsRelances) {
+                pikeSQL.modifierPike(poisson);
+            }
             poissons.clear();
             poissons.addAll(new PikeSQL().voirAllPike());
         }

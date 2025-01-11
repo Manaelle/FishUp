@@ -231,6 +231,18 @@ public class HookSQL {
         return false;
     }
 
+    public void supprimerTousLesHooks() {
+        String deleteQuery = "DELETE FROM hook";
+
+        try (Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
+             PreparedStatement stmt = connexion.prepareStatement(deleteQuery)) {
+
+            int rowsDeleted = stmt.executeUpdate();
+            System.out.println(rowsDeleted + " hooks supprimés.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
     
