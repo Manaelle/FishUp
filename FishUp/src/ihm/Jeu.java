@@ -156,6 +156,9 @@ public class Jeu {
     }
 
     public boolean collisionEntreHookEtPike(Pike poisson) {
+        
+        
+        
         return !(poisson.getX() >= hook.getX() + hook.getLargeur()
                 || poisson.getX() + poisson.getLargeur() <= hook.getX()
                 || poisson.getY() >= hook.getY() + hook.getHauteur()

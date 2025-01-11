@@ -45,9 +45,9 @@ public class HookSQL {
 
             PreparedStatement requete = connexion.prepareStatement("INSERT INTO hook (PlayerID) VALUES (?)");
             requete.setInt(1, H.getHook_id());
-            System.out.println(requete);
+            // System.out.println(requete);
             int nombreDAjouts = requete.executeUpdate();
-            System.out.println(nombreDAjouts + " enregistrement(s) ajoute(s)");
+            // System.out.println(nombreDAjouts + " enregistrement(s) ajoute(s)");
             requete.close();
             connexion.close();
 
@@ -71,9 +71,9 @@ public class HookSQL {
             requete.setDouble(1, H.getX());
             requete.setDouble(2, H.getY());
             requete.setInt(3, H.getHook_id());
-            System.out.println(requete);
+            // System.out.println(requete);
             int nombreDeModifications = requete.executeUpdate();
-            System.out.println(nombreDeModifications + " enregistrement(s) modifie(s)");
+            // System.out.println(nombreDeModifications + " enregistrement(s) modifie(s)");
 
             requete.close();
             connexion.close();
@@ -91,9 +91,9 @@ public class HookSQL {
 
             PreparedStatement requete = connexion.prepareStatement("DELETE FROM hook WHERE PlayerId = ?");
             requete.setInt(1, H.getHook_id());
-            System.out.println(requete);
+            // System.out.println(requete);
             int nombreDeSuppressions = requete.executeUpdate();
-            System.out.println(nombreDeSuppressions + " enregistrement(s) supprime(s)");
+            // System.out.println(nombreDeSuppressions + " enregistrement(s) supprime(s)");
 
             requete.close();
             connexion.close();
@@ -112,7 +112,7 @@ public class HookSQL {
 
             PreparedStatement requete = connexion.prepareStatement("SELECT * FROM hook WHERE PlayerId = ?");
             requete.setInt(1, H.getHook_id());
-            System.out.println(requete);
+            // System.out.println(requete);
             ResultSet resultat = requete.executeQuery();
             OutilsJDBC.afficherResultSet(resultat);
 
@@ -177,9 +177,9 @@ public class HookSQL {
                                                                     WHERE PlayerID = ?""");
             requete.setInt(1, H.getHook_id());
         
-            System.out.println(requete);
+            // System.out.println(requete);
             int nombreDeModifications = requete.executeUpdate();
-            System.out.println(nombreDeModifications + " enregistrement(s) modifié(s)");
+            // System.out.println(nombreDeModifications + " enregistrement(s) modifié(s)");
 
             requete.close();
             connexion.close();

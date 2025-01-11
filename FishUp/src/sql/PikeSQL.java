@@ -51,7 +51,7 @@ public class PikeSQL {
             stmt.setBoolean(5, pike.getSens());
 
             stmt.executeUpdate();
-            System.out.println("Pike créé : ID=" + pike.getId() + ", Type=" + pike.getFishType());
+            // System.out.println("Pike créé : ID=" + pike.getId() + ", Type=" + pike.getFishType());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -72,9 +72,9 @@ public class PikeSQL {
             requete.setDouble(1, P.getX());
             requete.setDouble(2, P.getY());
             requete.setInt(3, P.getId());
-            System.out.println(requete);
+            // System.out.println(requete);
             int nombreDeModifications = requete.executeUpdate();
-            System.out.println(nombreDeModifications + " enregistrement(s) modifie(s)");
+            // System.out.println(nombreDeModifications + " enregistrement(s) modifie(s)");
 
             requete.close();
             connexion.close();
@@ -92,9 +92,9 @@ public class PikeSQL {
 
             PreparedStatement requete = connexion.prepareStatement("DELETE FROM fish WHERE Id = ?");
             requete.setInt(1, P.getId());
-            System.out.println(requete);
+            // System.out.println(requete);
             int nombreDeSuppressions = requete.executeUpdate();
-            System.out.println(nombreDeSuppressions + " enregistrement(s) supprime(s)");
+            // System.out.println(nombreDeSuppressions + " enregistrement(s) supprime(s)");
 
             requete.close();
             connexion.close();
@@ -113,7 +113,7 @@ public class PikeSQL {
 
             PreparedStatement requete = connexion.prepareStatement("SELECT * FROM fish WHERE Id = ?");
             requete.setInt(1, P.getId());
-            System.out.println(requete);
+            // System.out.println(requete);
             ResultSet resultat = requete.executeQuery();
             OutilsJDBC.afficherResultSet(resultat);
 
@@ -195,6 +195,39 @@ public class PikeSQL {
         }
         return coordinates; // Retourne les coordonnées
     }
+    
+    public void marquerPikeCommeInactif(Pike poisson) {
+        try (Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse)) {
+            PreparedStatement requete = connexion.prepareStatement("""
+                UPDATE fish 
+                SET isVisible = false 
+                WHERE Id = ?""");
+            requete.setInt(1, poisson.getId());
+            requete.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public List<Pike> voirPikesVisibles() {
+        List<Pike> poissonsVisibles = new ArrayList<>();
+        try (Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse)) {
+            PreparedStatement requete = connexion.prepareStatement("""
+                SELECT * FROM fish 
+                WHERE isVisible = true""");
+            ResultSet resultSet = requete.executeQuery();
+            while (resultSet.next()) {
+                Pike poisson = new Pike(resultSet.getInt("Id"));
+                poisson.setX(resultSet.getDouble("x"));
+                poisson.setY(resultSet.getDouble("y"));
+                poissonsVisibles.add(poisson);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return poissonsVisibles;
+    }
+
     
     /*
     
