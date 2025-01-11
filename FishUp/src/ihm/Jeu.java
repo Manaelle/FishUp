@@ -137,8 +137,8 @@ public class Jeu {
                 poisson.insertOrUpdateInDB(); // Met à jour les poissons dans la base
             }
         } else {
-            // poissons.clear();
-            // poissons.addAll(new PikeSQL().voirAllPike()); // Récupère les poissons depuis la base
+            poissons.clear();
+            poissons.addAll(new PikeSQL().voirAllPike()); // Récupère les poissons depuis la base
         }
 
 
