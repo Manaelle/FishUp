@@ -92,6 +92,7 @@ public class Jeu {
                     case 1: this.score += 10; break;
                     case 2: this.score += 15; break;
                     case 3: this.score += 20; break;
+                    case 4: this.score += 25; break;
                 }
                 poisson.lancer();
             }

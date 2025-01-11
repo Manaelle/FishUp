@@ -26,14 +26,16 @@ import java.util.Random;
 public class Pike {
 
     protected BufferedImage sprite;
-    protected BufferedImage blueFishD;
-    protected BufferedImage redFishD;
-    protected BufferedImage yellowFishD;
-    protected BufferedImage greenFishD;
-    protected BufferedImage blueFishG;
-    protected BufferedImage redFishG;
-    protected BufferedImage yellowFishG;
-    protected BufferedImage greenFishG; 
+    protected BufferedImage noirFishD;
+    protected BufferedImage orangeFishD;
+    protected BufferedImage rougeFishD;
+    protected BufferedImage roseFishD;
+    protected BufferedImage vertFishD;
+    protected BufferedImage noirFishG;
+    protected BufferedImage orangeFishG;
+    protected BufferedImage rougeFishG;
+    protected BufferedImage roseFishG;
+    protected BufferedImage vertFishG;  
     protected double x, y;
     protected boolean sens;
     protected int fishType;
@@ -41,30 +43,36 @@ public class Pike {
     public Pike() {
         Random rand = new Random();
         try {
-            this.blueFishD = ImageIO.read(getClass().getResource("../resources/Poisson bleuD.png"));
-            this.redFishD = ImageIO.read(getClass().getResource("../resources/Poisson rougeD.png"));
-            this.greenFishD = ImageIO.read(getClass().getResource("../resources/Poisson vertD.png"));
-            this.yellowFishD = ImageIO.read(getClass().getResource("../resources/Poisson jauneD.png"));
-            this.blueFishG = ImageIO.read(getClass().getResource("../resources/Poisson bleuG.png"));
-            this.redFishG = ImageIO.read(getClass().getResource("../resources/Poisson rougeG.png"));
-            this.greenFishG = ImageIO.read(getClass().getResource("../resources/Poisson vertG.png"));
-            this.yellowFishG = ImageIO.read(getClass().getResource("../resources/Poisson jauneG.png"));
-            this.fishType = rand.nextInt(4);
+            this.noirFishD = ImageIO.read(getClass().getResource("../resources/poisson_noirD.png"));
+            this.orangeFishD = ImageIO.read(getClass().getResource("../resources/poisson_orangeD.png"));
+            this.roseFishD = ImageIO.read(getClass().getResource("../resources/poisson_roseD.png"));
+            this.rougeFishD = ImageIO.read(getClass().getResource("../resources/poisson_rougeD.png"));
+            this.vertFishD = ImageIO.read(getClass().getResource("../resources/poisson_vertD.png"));
+            this.noirFishG = ImageIO.read(getClass().getResource("../resources/poisson_noirG.jpeg"));
+            this.orangeFishG = ImageIO.read(getClass().getResource("../resources/poisson_orangeG.jpeg"));
+            this.roseFishG = ImageIO.read(getClass().getResource("../resources/poisson_roseG.jpeg"));
+            this.rougeFishG = ImageIO.read(getClass().getResource("../resources/poisson_rougeG.jpeg"));
+            this.vertFishG = ImageIO.read(getClass().getResource("../resources/poisson_vertG.jpeg"));
+            
+            
+            this.fishType = rand.nextInt(5);
             this.sens = rand.nextBoolean();   
             if (sens){    
                 switch(this.fishType){
-                    case 0: this.sprite = blueFishD; break;
-                    case 1: this.sprite = redFishD; break;
-                    case 2: this.sprite = greenFishD; break;
-                    case 3: this.sprite = yellowFishD; break;
+                    case 0: this.sprite = noirFishD; break;
+                    case 1: this.sprite = orangeFishD; break;
+                    case 2: this.sprite = roseFishD; break;
+                    case 3: this.sprite = rougeFishD; break;
+                    case 4: this.sprite = vertFishD; break;
                 }
             }
             else{
                 switch(this.fishType){
-                    case 0: this.sprite = blueFishG; break;
-                    case 1: this.sprite = redFishG; break;
-                    case 2: this.sprite = greenFishG; break;
-                    case 3: this.sprite = yellowFishG; break;
+                    case 0: this.sprite = noirFishG; break;
+                    case 1: this.sprite = orangeFishG; break;
+                    case 2: this.sprite = roseFishG; break;
+                    case 3: this.sprite = rougeFishG; break;
+                    case 4: this.sprite = vertFishG; break;
                 }
             }
         } catch (IOException ex) {
@@ -77,18 +85,20 @@ public class Pike {
         //try {
             if (sens){
                 switch(this.fishType){
-                    case 0: this.sprite = blueFishD; break;
-                    case 1: this.sprite = redFishD; break;
-                    case 2: this.sprite = greenFishD; break;
-                    case 3: this.sprite = yellowFishD; break;
+                    case 0: this.sprite = noirFishD; break;
+                    case 1: this.sprite = orangeFishD; break;
+                    case 2: this.sprite = roseFishD; break;
+                    case 3: this.sprite = rougeFishD; break;
+                    case 4: this.sprite = vertFishD; break;
                 }
             }
             else{
                 switch(this.fishType){
-                    case 0: this.sprite = blueFishG; break;
-                    case 1: this.sprite = redFishG; break;
-                    case 2: this.sprite = greenFishG; break;
-                    case 3: this.sprite = yellowFishG; break;
+                    case 0: this.sprite = noirFishG; break;
+                    case 1: this.sprite = orangeFishG; break;
+                    case 2: this.sprite = roseFishG; break;
+                    case 3: this.sprite = rougeFishG; break;
+                    case 4: this.sprite = vertFishG; break;
                 }
             }
             
@@ -112,6 +122,7 @@ public class Pike {
                 case 1: x = x + 10; break;
                 case 2: x = x + 13; break;
                 case 3: x = x + 15; break;
+                case 4: x = x + 20; break;
             }
         }
         else{
@@ -120,6 +131,7 @@ public class Pike {
                 case 1: x = x - 10; break;
                 case 2: x = x - 13; break;
                 case 3: x = x - 15; break;
+                case 4: x = x - 20; break;
             }
         }
     }
@@ -132,7 +144,7 @@ public class Pike {
     public void lancer() {
         Random rand = new Random();
         this.y = 96 + Math.random() * (704-sprite.getWidth());
-        this.fishType = rand.nextInt(4);
+        this.fishType = rand.nextInt(5);
         if(this.sens){
             this.x = 96;
         }
