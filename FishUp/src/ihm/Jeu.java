@@ -146,21 +146,6 @@ public class Jeu {
             // Les joueurs non maîtres synchronisent leur liste locale avec la base
             for (Pike poisson : poissonsRelances) {
                 pikeSQL.modifierPike(poisson);
-                if (collisionEntreHookEtPike(poisson)) {
-                    switch (poisson.getFishType()) {
-                        case 0 -> score += 1;
-                        case 1 -> score += 3;
-                        case 2 -> score += 10;
-                        case 3 -> score += 50;
-                    }
-                pikeSQL.supprimerPike(poisson); // Supprime le poisson actuel de la base de données
-                poissons.remove(poisson); // Supprime le poisson de la liste
-
-                poisson.lancer(); // Relance le poisson
-                pikeSQL.creerPike(poisson); // Met à jour le poisson dans la base de données
-                poissonsRelances.add(poisson); // Ajoute à la liste des poissons relancés
-            }
-
             }
             poissons.clear();
             
