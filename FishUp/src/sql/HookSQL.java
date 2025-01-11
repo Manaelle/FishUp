@@ -66,7 +66,7 @@ public class HookSQL {
             PreparedStatement requete = connexion.prepareStatement("""
                                                                    UPDATE hook 
                                                                    SET x = ?,
-                                                                   y = ?,
+                                                                   y = ?
                                                                    WHERE PlayerID = ?""");
             requete.setDouble(1, H.getX());
             requete.setDouble(2, H.getY());

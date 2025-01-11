@@ -72,6 +72,9 @@ public class Hook {
         if (y < 96) { // collision avec le bord bas de la scene
             y = 96;
         }
+        // Synchroniser avec la base de données
+        HookSQL hookSQL = new HookSQL();
+        hookSQL.modifierHookXY(this);
     }
 
     public void rendu(Graphics2D contexte) {

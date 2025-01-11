@@ -88,22 +88,14 @@ public class Jeu {
         this.carte.miseAJour();
         this.hook.miseAJour();
 
-        HookSQL hookSQL = new HookSQL();
-        List<Hook> hooksFromDB = hookSQL.getAllHooks();
-
-        for (Hook hookFromDB : hooksFromDB) {
-            if (hookFromDB.getHook_id() != this.hook.getHook_id()) {
-                for (Hook localHook : hooks) {
-                    if (localHook.getHook_id() == hookFromDB.getHook_id()) {
-                        localHook.setX(hookFromDB.getX());
-                        localHook.setY(hookFromDB.getY());
-                    }
-                }
-            }
+        // Mettre à jour les hooks contrôlés par d'autres joueurs
+        for (Hook otherHook : hooks) {
+            otherHook.miseAJour(); // Synchronise également la base via HookSQL
         }
 
         Iterator<Pike> it = poissons.iterator();
         List<Pike> poissonsRelances = new ArrayList<>();
+
         while (it.hasNext()) {
             Pike poisson = it.next();
             poisson.miseAJour();
@@ -115,15 +107,23 @@ public class Jeu {
                     case 2 -> score += 10;
                     case 3 -> score += 50;
                 }
+
                 poisson.deleteFromDB();
                 it.remove();
+
                 poisson.lancer();
+                poisson.insertOrUpdateInDB();
                 poissonsRelances.add(poisson);
+            }
+
+            if (System.currentTimeMillis() % 100 == 0) {
+                poisson.insertOrUpdateInDB();
             }
         }
 
         poissons.addAll(poissonsRelances);
     }
+
 
 
 
