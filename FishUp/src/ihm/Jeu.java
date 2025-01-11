@@ -130,6 +130,7 @@ public class Jeu {
                 poissonsRelances.add(poisson); // Ajoute à la liste des poissons relancés
             }
         }
+        // commentaire
 
         // Ajouter les poissons relancés à la liste principale
         poissons.addAll(poissonsRelances);
@@ -147,6 +148,7 @@ public class Jeu {
                 pikeSQL.modifierPike(poisson);
             }
             poissons.clear();
+            
             poissons.addAll(new PikeSQL().voirAllPike());
         }
     }
