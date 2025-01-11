@@ -125,7 +125,7 @@ public class PikeSQL {
         }
 
     }
-     
+     /*
         public List<Pike> voirAllPike() {
             List<Pike> pikes = new ArrayList<>();
 
@@ -145,7 +145,33 @@ public class PikeSQL {
             }
 
             return pikes;
+        }*/
+     
+     public List<Pike> voirAllPike() {
+        List<Pike> pikes = new ArrayList<>();
+
+        try (Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
+             PreparedStatement requete = connexion.prepareStatement("SELECT id, x, y, sens, fishType FROM fish");
+             ResultSet resultat = requete.executeQuery()) {
+
+            while (resultat.next()) {
+                int id = resultat.getInt("id");
+                double x = resultat.getDouble("x");
+                double y = resultat.getDouble("y");
+                boolean sens = resultat.getBoolean("sens");
+                int fishType = resultat.getInt("fishType");
+
+                // Utilisation du constructeur complet de Pike
+                Pike poisson = new Pike(id, x, y, sens, fishType);
+                pikes.add(poisson);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
+
+        return pikes;
+    }
      
      
      

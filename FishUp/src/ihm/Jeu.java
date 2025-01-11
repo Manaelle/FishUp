@@ -50,7 +50,7 @@ public class Jeu {
             // Joueur maître : Créer les poissons et les insérer dans la base
             hookSQL.definirMaster(this.hook);
             PikeSQL pikeSQL = new PikeSQL();
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= 5; i++) {
                 Pike poisson = new Pike(i); // Crée un nouveau Pike avec des données aléatoires
                 poisson.lancer(); // Positionne aléatoirement le poisson
                 pikeSQL.creerPike(poisson); // Insère le Pike dans la base de données
@@ -137,8 +137,8 @@ public class Jeu {
                 poisson.insertOrUpdateInDB(); // Met à jour les poissons dans la base
             }
         } else {
-            poissons.clear();
-            poissons.addAll(new PikeSQL().voirAllPike()); // Récupère les poissons depuis la base
+            // poissons.clear();
+            // poissons.addAll(new PikeSQL().voirAllPike()); // Récupère les poissons depuis la base
         }
 
 
