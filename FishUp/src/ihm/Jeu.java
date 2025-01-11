@@ -126,7 +126,7 @@ public class Jeu {
                 poissons.remove(poisson); // Supprime le poisson de la liste
 
                 poisson.lancer(); // Relance le poisson
-                pikeSQL.modifierPike(poisson); // Met à jour le poisson dans la base de données
+                pikeSQL.creerPike(poisson); // Met à jour le poisson dans la base de données
                 poissonsRelances.add(poisson); // Ajoute à la liste des poissons relancés
             }
         }
@@ -135,6 +135,7 @@ public class Jeu {
         poissons.addAll(poissonsRelances);
 
         // Synchroniser les poissons pour tous les joueurs
+        HookSQL hookSQL = new HookSQL();
         if (hookSQL.isMaster(this.hook)) { 
             // Le joueur maître met à jour tous les poissons dans la base
             for (Pike poisson : poissons) {
