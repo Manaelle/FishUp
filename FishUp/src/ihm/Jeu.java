@@ -19,6 +19,8 @@ public class Jeu {
     private final Carte carte;
     private final List<Pike> poissons;
     private final Hook hook;
+    private final HookSQL hookSQL;
+
 
     public Jeu(FenetreDeJeu fenetre) {
         this.fenetre = fenetre;
@@ -27,8 +29,9 @@ public class Jeu {
         this.boat = new Boat();
         this.carte = new Carte();
         poissons = new ArrayList<>();
+        this.hookSQL = new HookSQL(); // Initialisation de l'attribut
         
-        HookSQL hookSQL = new HookSQL();
+        // HookSQL hookSQL = new HookSQL();
 
         int newID = 1; // ID initial
         int[] playerIDs = hookSQL.voirHookID();
@@ -44,19 +47,20 @@ public class Jeu {
         hookSQL.creerHook(this.hook); // Ajouter le Hook à la base de données
         
         if (newID == 1) {
-            // Définir isMaster à 1 pour le nouveau Hook
+            // Joueur maître : Créer les poissons et les insérer dans la base
             hookSQL.definirMaster(this.hook);
-
             PikeSQL pikeSQL = new PikeSQL();
             for (int i = 1; i <= 10; i++) {
-                Pike poisson = new Pike(i); // Crée un nouveau Pike avec un ID
+                Pike poisson = new Pike(i); // Crée un nouveau Pike avec des données aléatoires
                 poisson.lancer(); // Positionne aléatoirement le poisson
                 pikeSQL.creerPike(poisson); // Insère le Pike dans la base de données
                 poissons.add(poisson); // Ajoute le Pike à la liste des poissons
             }
         } else {
+            // Joueurs non maîtres : Charger les poissons existants
             poissons.addAll(new PikeSQL().voirAllPike());
         }
+
     }
 
     public void rendu(Graphics2D contexte) {
@@ -122,12 +126,24 @@ public class Jeu {
                 poissonsRelances.add(poisson);
             }
 
-            if (System.currentTimeMillis() % 100 == 0) {
+            if (System.currentTimeMillis() % 100 == 0) { // Synchronisation périodique
                 poisson.insertOrUpdateInDB();
             }
         }
 
         poissons.addAll(poissonsRelances);
+
+        // Synchroniser la liste des poissons pour les autres joueurs
+        if (hookSQL.isMaster(this.hook)) { // Vérifie si le hook actuel est maître
+            for (Pike poisson : poissons) {
+                poisson.insertOrUpdateInDB(); // Met à jour les poissons dans la base
+            }
+        } else {
+            poissons.clear();
+            poissons.addAll(new PikeSQL().voirAllPike()); // Récupère les poissons depuis la base
+        }
+
+
     }
 
 

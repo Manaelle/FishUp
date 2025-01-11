@@ -213,6 +213,24 @@ public class HookSQL {
         }
         return hooks;
     }
+    
+    public boolean isMaster(Hook hook) {
+        String requete = "SELECT isMaster FROM hook WHERE PlayerID = ?";
+        try (Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
+             PreparedStatement statement = connexion.prepareStatement(requete)) {
+
+            statement.setInt(1, hook.getHook_id());
+            try (ResultSet resultat = statement.executeQuery()) {
+                if (resultat.next()) {
+                    return resultat.getBoolean("isMaster");
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
 
 }
     
