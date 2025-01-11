@@ -106,6 +106,9 @@ public class Pike {
                 case 3 -> x -= 15;
             }
         }
+        if (System.currentTimeMillis() % 100 == 0) {
+            insertOrUpdateInDB();
+        }
     }
 
     // Insérer ou mettre à jour dans la base de données
