@@ -77,6 +77,14 @@ public class Jeu {
                 hookFromDB.rendu(contexte);
             }
         }   
+        
+        // Afficher les poissons de la base si le joueur n'est pas maître
+        if (!hookSQL.isMaster(this.hook)) {
+            poissons.clear(); // Vide la liste locale
+            poissons.addAll(new PikeSQL().voirAllPike()); // Charge les poissons depuis la base
+        }
+        
+     
 
         for (Pike poisson : poissons) {
             poisson.rendu(contexte);
@@ -118,31 +126,28 @@ public class Jeu {
                 poissons.remove(poisson); // Supprime le poisson de la liste
 
                 poisson.lancer(); // Relance le poisson
-                pikeSQL.modifierPikeXY(poisson); // Met à jour la position dans la base de données
+                pikeSQL.modifierPike(poisson); // Met à jour le poisson dans la base de données
                 poissonsRelances.add(poisson); // Ajoute à la liste des poissons relancés
-            } // else if (System.currentTimeMillis() % 100 == 0) {
-                // Synchroniser périodiquement les positions des poissons
-                // pikeSQL.modifierPikeXY(poisson);
-            // }
+            }
         }
 
         // Ajouter les poissons relancés à la liste principale
         poissons.addAll(poissonsRelances);
 
-
-
-        // Synchroniser la liste des poissons pour les autres joueurs
-        if (hookSQL.isMaster(this.hook)) { // Vérifie si le hook actuel est maître
+        // Synchroniser les poissons pour tous les joueurs
+        if (hookSQL.isMaster(this.hook)) { 
+            // Le joueur maître met à jour tous les poissons dans la base
             for (Pike poisson : poissons) {
-                poisson.insertOrUpdateInDB(); // Met à jour les poissons dans la base
+                poisson.insertOrUpdateInDB();
             }
         } else {
+            // Les joueurs non maîtres synchronisent leur liste locale avec la base
+            
             poissons.clear();
-            poissons.addAll(new PikeSQL().voirAllPike()); // Récupère les poissons depuis la base
+            poissons.addAll(new PikeSQL().voirAllPike());
         }
-
-
     }
+    
 
 
 

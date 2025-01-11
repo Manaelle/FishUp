@@ -58,6 +58,28 @@ public class PikeSQL {
     }
     
     
+    
+    public void modifierPike(Pike pike) {
+        String updateQuery = "UPDATE fish SET x = ?, y = ?, Sens = ?, FishType = ? WHERE Id = ?";
+
+        try (Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
+             PreparedStatement stmt = connexion.prepareStatement(updateQuery)) {
+
+            stmt.setDouble(1, pike.getX());
+            stmt.setDouble(2, pike.getY());
+            stmt.setBoolean(3, pike.getSens());
+            stmt.setInt(4, pike.getFishType());
+            stmt.setInt(5, pike.getId());
+
+            stmt.executeUpdate();
+            // System.out.println("Pike modifié : ID=" + pike.getId() + ", Type=" + pike.getFishType());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    
      public void modifierPikeXY(Pike P){
        //TODO (va utiliser UPDATE dans sa requête SQL)
         try {
