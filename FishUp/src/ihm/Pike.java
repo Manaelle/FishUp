@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import sql.*;
 
 public class Pike {
 
@@ -106,10 +107,11 @@ public class Pike {
                 case 3 -> x -= 15;
             }
         }
-        if (System.currentTimeMillis() % 100 == 0) {
-            insertOrUpdateInDB();
+        // Synchroniser avec la base de données
+        PikeSQL pikeSQL = new PikeSQL();
+        pikeSQL.modifierPikeXY(this);
         }
-    }
+    
 
     // Insérer ou mettre à jour dans la base de données
     public void insertOrUpdateInDB() {

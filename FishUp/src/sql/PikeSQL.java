@@ -67,7 +67,7 @@ public class PikeSQL {
             PreparedStatement requete = connexion.prepareStatement("""
                                                                    UPDATE fish 
                                                                    SET x = ?,
-                                                                   y = ?,
+                                                                   y = ?
                                                                    WHERE Id = ?""");
             requete.setDouble(1, P.getX());
             requete.setDouble(2, P.getY());
