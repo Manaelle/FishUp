@@ -114,7 +114,7 @@ public class Jeu {
                     case 3 -> score += 50;
                 }
 
-                poisson.deleteFromDB(); // Supprime le poisson actuel de la base de données
+                pikeSQL.supprimerPike(poisson); // Supprime le poisson actuel de la base de données
                 poissons.remove(poisson); // Supprime le poisson de la liste
 
                 poisson.lancer(); // Relance le poisson
