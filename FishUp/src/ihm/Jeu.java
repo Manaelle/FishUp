@@ -92,6 +92,10 @@ public class Jeu {
         for (Hook otherHook : hooks) {
             otherHook.miseAJour(); // Synchronise également la base via HookSQL
         }
+        // Mettre à jour les pikes
+        for (Pike otherPike : poissons) {
+            otherPike.miseAJour(); // Synchronise également la base via PikeSQL
+        }
 
         Iterator<Pike> it = poissons.iterator();
         List<Pike> poissonsRelances = new ArrayList<>();
