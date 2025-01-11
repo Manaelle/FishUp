@@ -96,18 +96,14 @@ public class Jeu {
 
         // Mettre à jour les hooks contrôlés par d'autres joueurs
         for (Hook otherHook : hooks) {
-            otherHook.miseAJour(); // Synchronise également la base via HookSQL
-        }
-        // Mettre à jour les pikes
-        for (Pike otherPike : poissons) {
-            otherPike.miseAJour(); // Synchronise également la base via PikeSQL
+            otherHook.miseAJour();
         }
 
-        Iterator<Pike> it = poissons.iterator();
+        // Mettre à jour les poissons
+        PikeSQL pikeSQL = new PikeSQL();
         List<Pike> poissonsRelances = new ArrayList<>();
 
-        while (it.hasNext()) {
-            Pike poisson = it.next();
+        for (Pike poisson : new ArrayList<>(poissons)) { // Création d'une copie pour éviter les problèmes de modification concurrente
             poisson.miseAJour();
 
             if (collisionEntreHookEtPike(poisson)) {
@@ -118,20 +114,22 @@ public class Jeu {
                     case 3 -> score += 50;
                 }
 
-                poisson.deleteFromDB();
-                it.remove();
+                poisson.deleteFromDB(); // Supprime le poisson actuel de la base de données
+                poissons.remove(poisson); // Supprime le poisson de la liste
 
-                poisson.lancer();
-                poisson.insertOrUpdateInDB();
-                poissonsRelances.add(poisson);
-            }
-
-            if (System.currentTimeMillis() % 100 == 0) { // Synchronisation périodique
-                poisson.insertOrUpdateInDB();
-            }
+                poisson.lancer(); // Relance le poisson
+                pikeSQL.modifierPikeXY(poisson); // Met à jour la position dans la base de données
+                poissonsRelances.add(poisson); // Ajoute à la liste des poissons relancés
+            } // else if (System.currentTimeMillis() % 100 == 0) {
+                // Synchroniser périodiquement les positions des poissons
+                // pikeSQL.modifierPikeXY(poisson);
+            // }
         }
 
+        // Ajouter les poissons relancés à la liste principale
         poissons.addAll(poissonsRelances);
+
+
 
         // Synchroniser la liste des poissons pour les autres joueurs
         if (hookSQL.isMaster(this.hook)) { // Vérifie si le hook actuel est maître
