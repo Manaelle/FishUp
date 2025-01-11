@@ -84,47 +84,46 @@ public class Jeu {
         contexte.drawString("Score Actuel : " + score, 900, 80);
     }
 
-public void miseAJour() {
-    this.carte.miseAJour();
-    this.hook.miseAJour();
-    // Iterator<Hook> it2 =hooks.iterator();
-    Iterator<Pike> it = poissons.iterator();
-    List<Pike> poissonsRelances = new ArrayList<>();
+    public void miseAJour() {
+        this.carte.miseAJour();
+        this.hook.miseAJour();
 
-    while (it.hasNext()) { //&&it2.hasNext()
-        //Hook hook = it2.next();
-        Pike poisson = it.next();
-        // hook.miseAJour();
-        poisson.miseAJour();
-        
-        if (collisionEntreHookEtPike(poisson)) {
-            switch (poisson.getFishType()) {
-                case 0 -> score += 5;
-                case 1 -> score += 10;
-                case 2 -> score += 15;
-                case 3 -> score += 20;
+        HookSQL hookSQL = new HookSQL();
+        List<Hook> hooksFromDB = hookSQL.getAllHooks();
+
+        for (Hook hookFromDB : hooksFromDB) {
+            if (hookFromDB.getHook_id() != this.hook.getHook_id()) {
+                for (Hook localHook : hooks) {
+                    if (localHook.getHook_id() == hookFromDB.getHook_id()) {
+                        localHook.setX(hookFromDB.getX());
+                        localHook.setY(hookFromDB.getY());
+                    }
+                }
             }
-
-            // Supprimer le poisson de la base et de la liste
-            poisson.deleteFromDB();
-            it.remove();
-
-            // Relancer le poisson et ajouter à une liste temporaire
-            poisson.lancer();
-            poisson.insertOrUpdateInDB();
-            poissonsRelances.add(poisson);
         }
-        // Appel à insertOrUpdateInDB pour synchroniser les coordonnées avec la base de données
-        // Synchroniser la base de données toutes les 100 ms (ou à intervalle adapté)
-        if (System.currentTimeMillis() % 100 == 0) {
-            poisson.insertOrUpdateInDB();
+
+        Iterator<Pike> it = poissons.iterator();
+        List<Pike> poissonsRelances = new ArrayList<>();
+        while (it.hasNext()) {
+            Pike poisson = it.next();
+            poisson.miseAJour();
+
+            if (collisionEntreHookEtPike(poisson)) {
+                switch (poisson.getFishType()) {
+                    case 0 -> score += 1;
+                    case 1 -> score += 3;
+                    case 2 -> score += 10;
+                    case 3 -> score += 50;
+                }
+                poisson.deleteFromDB();
+                it.remove();
+                poisson.lancer();
+                poissonsRelances.add(poisson);
+            }
         }
-        
+
+        poissons.addAll(poissonsRelances);
     }
-
-    // Ajouter les poissons relancés après la boucle
-    poissons.addAll(poissonsRelances);
-}
 
 
 
