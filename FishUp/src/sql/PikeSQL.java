@@ -38,25 +38,25 @@ public class PikeSQL {
     }
     
     //Je t'ai mis ici les 4 méthodes qui vont être importantes à coder, à toi de fustionner ça avec les bouts de code dans tes tests : 
-    public void creerPike(Pike P){
-       //TODO (va utiliser CREATE dans sa requête SQL)
-        try {
+    public void creerPike(Pike pike) {
+        String insertQuery = "INSERT INTO fish (Id, FishType, x, y, Sens) VALUES (?, ?, ?, ?, ?)";
 
-            Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
+        try (Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
+             PreparedStatement stmt = connexion.prepareStatement(insertQuery)) {
 
-            PreparedStatement requete = connexion.prepareStatement("INSERT INTO fish (Id) VALUES (?)");
-            requete.setInt(1, P.getId());
-            System.out.println(requete);
-            int nombreDAjouts = requete.executeUpdate();
-            System.out.println(nombreDAjouts + " enregistrement(s) ajoute(s)");
-            requete.close();
-            connexion.close();
+            stmt.setInt(1, pike.getId());
+            stmt.setInt(2, pike.getFishType()); // Inclure fishType aléatoire
+            stmt.setDouble(3, pike.getX());
+            stmt.setDouble(4, pike.getY());
+            stmt.setBoolean(5, pike.getSens());
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            stmt.executeUpdate();
+            System.out.println("Pike créé : ID=" + pike.getId() + ", Type=" + pike.getFishType());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
     }
+    
     
      public void modifierPikeXY(Pike P){
        //TODO (va utiliser UPDATE dans sa requête SQL)

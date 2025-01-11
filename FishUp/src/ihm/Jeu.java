@@ -43,16 +43,18 @@ public class Jeu {
 
         hookSQL.creerHook(this.hook); // Ajouter le Hook à la base de données
         
-        if (newID==1){
+        if (newID == 1) {
             // Définir isMaster à 1 pour le nouveau Hook
             hookSQL.definirMaster(this.hook);
+
+            PikeSQL pikeSQL = new PikeSQL();
             for (int i = 1; i <= 10; i++) {
-                Pike poisson = new Pike(i);
-                poisson.insertOrUpdateInDB();
-                poissons.add(poisson);
+                Pike poisson = new Pike(i); // Crée un nouveau Pike avec un ID
+                poisson.lancer(); // Positionne aléatoirement le poisson
+                pikeSQL.creerPike(poisson); // Insère le Pike dans la base de données
+                poissons.add(poisson); // Ajoute le Pike à la liste des poissons
             }
-        }
-        else {
+        } else {
             poissons.addAll(new PikeSQL().voirAllPike());
         }
     }
