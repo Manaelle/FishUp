@@ -10,84 +10,92 @@ import java.awt.image.BufferedImage;
 
 public class Menu extends JFrame {
 
-    private BufferedImage imagemDeFundo;
+    private BufferedImage imageDeFond;
 
     public Menu() {
         try {
-            imagemDeFundo = ImageIO.read(getClass().getResource("../resources/accueil.png")); // Ajuste o caminho da imagem
+            imageDeFond = ImageIO.read(getClass().getResource("../resources/accueil.png")); // Ajustez le chemin de l'image
         } catch (IOException e) {
             e.printStackTrace();
         }
         
-        // Configuração da janela do menu
+        // Configuration de la fenêtre du menu
         setTitle("Menu");
         setSize(1280, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Criando o painel de fundo com a imagem
+        // Création du panneau avec l'image de fond
         JPanel panel = new JPanel() {
-            // Sobrescreve o método paintComponent para desenhar a imagem de fundo
+            // Surcharge de la méthode paintComponent pour dessiner l'image de fond
             @Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g);  // Chama o método da classe pai para garantir que o painel seja desenhado corretamente
-                if (imagemDeFundo != null) {
-                    g.drawImage(imagemDeFundo, 0, 0, getWidth(), getHeight(), this);  // Redimensiona a imagem para cobrir todo o painel
+                super.paintComponent(g);  // Appelle la méthode parente pour garantir que le panneau est correctement dessiné
+                if (imageDeFond != null) {
+                    g.drawImage(imageDeFond, 0, 0, getWidth(), getHeight(), this);  // Redimensionne l'image pour couvrir tout le panneau
                 }
             }
         };
-        panel.setLayout(null); // Layout nulo para posicionar os componentes manualmente
-        add(panel); // Adiciona o painel à janela
+        panel.setLayout(null); // Layout nul pour positionner manuellement les composants
+        add(panel); // Ajoute le panneau à la fenêtre
         
-        // Botão para jogar sozinho
-        JButton soloButton = new JButton("Jouer seul");
-        soloButton.setBounds(530, 490, 200, 40);
-        panel.add(soloButton);
+        // Bouton pour jouer seul
+        JButton boutonSolo = new JButton("Jouer seul");
+        boutonSolo.setBounds(530, 490, 200, 40);
+        panel.add(boutonSolo);
 
-        // Botão para jogar multiplayer
-        JButton multiplayerButton = new JButton("Multijoueur");
-        multiplayerButton.setBounds(530, 540, 200, 40);
-        panel.add(multiplayerButton);
+        // Bouton pour jouer en multijoueur
+        JButton boutonMultijoueur = new JButton("Multijoueur");
+        boutonMultijoueur.setBounds(530, 540, 200, 40);
+        panel.add(boutonMultijoueur);
 
-        // Botão para as regras
-        JButton rulesButton = new JButton("Règles");
-        rulesButton.setBounds(530, 590, 200, 40);
-        panel.add(rulesButton);
+        // Bouton pour les règles
+        JButton boutonRegles = new JButton("Règles");
+        boutonRegles.setBounds(530, 590, 200, 40);
+        panel.add(boutonRegles);
 
-        // Ação do botão "Jouer seul"
-        soloButton.addActionListener(new ActionListener() {
+        // Action du bouton "Jouer seul"
+        boutonSolo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui você abre o jogo para um jogador
-                setVisible(false); // Fecha o menu
-                new FenetreDeJeu().setVisible(true); // Abre a janela do jogo
+                // Ouvre le jeu pour un joueur
+                setVisible(false); // Ferme le menu
+                new FenetreDeJeu().setVisible(true); // Ouvre la fenêtre du jeu
             }
         });
 
-        // Ação do botão "Multijoueur"
-        /*multiplayerButton.addActionListener(new ActionListener() {
+        // Action du bouton "Multijoueur"
+        /*boutonMultijoueur.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui você abre o jogo para multiplayer
+                // Ouvre le jeu en multijoueur
                 setVisible(false);
-                new FenetreDeJeuMultijoueur().setVisible(true); // Supondo que você tenha uma classe para multiplayer
+                new FenetreDeJeuMultijoueur().setVisible(true); // Supposons que vous ayez une classe pour le multijoueur
             }
         });*/
 
-        // Ação do botão "Règles"
-        rulesButton.addActionListener(new ActionListener() {
+        // Action du bouton "Règles"
+        boutonRegles.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Exibe as regras do jogo
-                JOptionPane.showMessageDialog(Menu.this, "Règles du jeu:\n\n1. ...\n2. ...", "Règles", JOptionPane.INFORMATION_MESSAGE);
+                // Affiche les règles du jeu
+                JOptionPane.showMessageDialog(Menu.this, "Règles du jeu:\n\nL'objectif est de pêcher le maximum de poissons dans le temps imparti !\n\nPour vous déplacer, appuyez sur :\n" + //
+                                        "Flèche droite pour se déplacer vers la droite\n" + //
+                                        "Flèche gauche pour se déplacer vers la gauche\n" + //
+                                        "Flèche haut pour se déplacer vers le haut\n" + //
+                                        "Flèche bas pour se déplacer vers le bas\n" + //
+                                        "Évitez les poissons protégés si vous ne voulez pas être ralenti dans votre quête du meilleur pêcheur !\n" + //
+                                        "\n" + //
+                                        "BONNE CHANCE !\n" + //
+                                        "\n", "Règles", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
-        // Centraliza a janela e a torna visível
+        // Centre la fenêtre et la rend visible
         setLocationRelativeTo(null);  
         setVisible(true);
     }
 
     public static void main(String[] args) {
-        new Menu();  // Inicia a janela do menu
+        new Menu();  // Lance la fenêtre du menu
     }
 }

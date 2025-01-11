@@ -11,6 +11,8 @@ package ihm;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -21,57 +23,33 @@ import javax.imageio.ImageIO;
  */
 public class Boat {
     
-    protected BufferedImage sprite;
-    protected double x, y;
+    protected BufferedImage bateau1;
+    protected BufferedImage bateau2;
+    protected BufferedImage bateau3;
+    protected BufferedImage bateau4;
+    protected double x1, x2, x3, x4, y;
 
     public Boat() {
         try {
-            this.sprite = ImageIO.read(getClass().getResource("../resources/bateau-peche1.png"));
+            this.bateau1 = ImageIO.read(getClass().getResource("../resources/bateau-peche1.png"));
+            this.bateau2 = ImageIO.read(getClass().getResource("../resources/bateau-peche2.png"));
+            this.bateau3 = ImageIO.read(getClass().getResource("../resources/bateau-peche3.png"));
+            this.bateau4 = ImageIO.read(getClass().getResource("../resources/bateau-peche4.png"));
         } catch (IOException ex) {
             Logger.getLogger(Pike.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        // We can make a conditional for the amount of players to have them at equal distances
-        // ex: if we have two players, the boats would be more spaced, if we have 3, they  would have their distance lowered
-        
-        this.x = 170;
-        this.y = -30;
-    }
-
-    public void miseAJour() {
-        if (x > 800 - sprite.getWidth()) { // collision avec le bord droit de la scene
-            x = 800 - sprite.getWidth() ;
-        }
-        if (x < 0) { // collision avec le bord gauche de la scene
-            x = 0;
-        }
-        if (y > 429 - sprite.getWidth()) { // collision avec le bord haut de la scene
-            y = 429 - sprite.getWidth() ;
-        }
-        if (y < -30) { // collision avec le bord bas de la scene
-            y = -30;
-        }
+        this.x1 = 170;
+        this.x2 = 400;
+        this.x3 = 630;
+        this.x4 = 860;
+        this.y = -30;        
     }
 
     public void rendu(Graphics2D contexte) {
-        contexte.drawImage(this.sprite, (int) x, (int) y, null);
+        contexte.drawImage(this.bateau1, (int) x1, (int) y, null);
+        contexte.drawImage(this.bateau2, (int) x2, (int) y, null);
+        contexte.drawImage(this.bateau3, (int) x3, (int) y, null);
+        contexte.drawImage(this.bateau4, (int) x4, (int) y, null);
     }
-    
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-    
-    public double getLargeur() {
-        return sprite.getHeight();
-    }
-
-    public double getHauteur() {
-        return sprite.getWidth();
-    }
-
     
 }

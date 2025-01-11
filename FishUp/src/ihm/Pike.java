@@ -48,11 +48,11 @@ public class Pike {
             this.roseFishD = ImageIO.read(getClass().getResource("../resources/poisson_roseD.png"));
             this.rougeFishD = ImageIO.read(getClass().getResource("../resources/poisson_rougeD.png"));
             this.vertFishD = ImageIO.read(getClass().getResource("../resources/poisson_vertD.png"));
-            this.noirFishG = ImageIO.read(getClass().getResource("../resources/poisson_noirG.jpeg"));
-            this.orangeFishG = ImageIO.read(getClass().getResource("../resources/poisson_orangeG.jpeg"));
-            this.roseFishG = ImageIO.read(getClass().getResource("../resources/poisson_roseG.jpeg"));
-            this.rougeFishG = ImageIO.read(getClass().getResource("../resources/poisson_rougeG.jpeg"));
-            this.vertFishG = ImageIO.read(getClass().getResource("../resources/poisson_vertG.jpeg"));
+            this.noirFishG = ImageIO.read(getClass().getResource("../resources/poisson_noirG.png"));
+            this.orangeFishG = ImageIO.read(getClass().getResource("../resources/poisson_orangeG.png"));
+            this.roseFishG = ImageIO.read(getClass().getResource("../resources/poisson_roseG.png"));
+            this.rougeFishG = ImageIO.read(getClass().getResource("../resources/poisson_rougeG.png"));
+            this.vertFishG = ImageIO.read(getClass().getResource("../resources/poisson_vertG.png"));
             
             
             this.fishType = rand.nextInt(5);
