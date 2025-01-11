@@ -17,6 +17,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import outils.OutilsJDBC;
 import ihm.Hook;
+import java.util.List;
 
 public class HookSQL {
     
@@ -164,6 +165,53 @@ public class HookSQL {
 
         // Convertit la liste dynamique en tableau d'entiers
         return listeID.stream().mapToInt(Integer::intValue).toArray();
+    }
+    
+    public void definirMaster(Hook H) {
+        try {
+            Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
+
+            PreparedStatement requete = connexion.prepareStatement("""
+                                                                    UPDATE hook 
+                                                                    SET isMaster = 1
+                                                                    WHERE PlayerID = ?""");
+            requete.setInt(1, H.getHook_id());
+        
+            System.out.println(requete);
+            int nombreDeModifications = requete.executeUpdate();
+            System.out.println(nombreDeModifications + " enregistrement(s) modifié(s)");
+
+            requete.close();
+            connexion.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public List<Hook> getAllHooks() {
+        List<Hook> hooks = new ArrayList<>();
+        try {
+            Connection connexion = DriverManager.getConnection(this.adresseBase, this.user, this.motdepasse);
+
+            PreparedStatement requete = connexion.prepareStatement("SELECT PlayerID, x, y FROM hook");
+            ResultSet resultat = requete.executeQuery();
+
+            while (resultat.next()) {
+                int playerID = resultat.getInt("PlayerID");
+                double x = resultat.getDouble("x");
+                double y = resultat.getDouble("y");
+                Hook hook = new Hook(playerID); // Crée un hook avec l'ID
+                hook.setX(x); // Définit la position X
+                hook.setY(y); // Définit la position Y
+                hooks.add(hook);
+            }
+
+            requete.close();
+            connexion.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return hooks;
     }
 
 }

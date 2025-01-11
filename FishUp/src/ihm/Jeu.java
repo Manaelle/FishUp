@@ -44,6 +44,8 @@ public class Jeu {
         hookSQL.creerHook(this.hook); // Ajouter le Hook à la base de données
         
         if (newID==1){
+            // Définir isMaster à 1 pour le nouveau Hook
+            hookSQL.definirMaster(this.hook);
             for (int i = 1; i <= 10; i++) {
                 Pike poisson = new Pike(i);
                 poisson.insertOrUpdateInDB();
@@ -60,9 +62,15 @@ public class Jeu {
         this.boat.rendu(contexte);
         this.hook.rendu(contexte);
         
-        for (Hook hook : hooks) {
-            hook.rendu(contexte);
-        }
+        HookSQL hookSQL = new HookSQL(); // Accès à la base de données
+        List<Hook> hooksFromDB = hookSQL.getAllHooks(); // Charge tous les hooks de la BDD
+
+        for (Hook hookFromDB : hooksFromDB) {
+            // Affiche uniquement les hooks dont l'ID est différent de celui de this.hook
+            if (hookFromDB.getHook_id() != this.hook.getHook_id()) {
+                hookFromDB.rendu(contexte);
+            }
+        }   
 
         for (Pike poisson : poissons) {
             poisson.rendu(contexte);
@@ -106,6 +114,12 @@ public void miseAJour() {
             poisson.insertOrUpdateInDB();
             poissonsRelances.add(poisson);
         }
+        // Appel à insertOrUpdateInDB pour synchroniser les coordonnées avec la base de données
+        // Synchroniser la base de données toutes les 100 ms (ou à intervalle adapté)
+        if (System.currentTimeMillis() % 100 == 0) {
+            poisson.insertOrUpdateInDB();
+        }
+        
     }
 
     // Ajouter les poissons relancés après la boucle
