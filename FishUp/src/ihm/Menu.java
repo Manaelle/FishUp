@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 
 public class Menu extends JFrame {
 
+    private String pseudo;
     private BufferedImage imageDeFond;
 
     public Menu() {
@@ -18,66 +19,60 @@ public class Menu extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         // Configuration de la fenêtre du menu
         setTitle("Menu");
         setSize(1280, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Création du panneau avec l'image de fond
+        // Création du panneau de fond avec l'image
         JPanel panel = new JPanel() {
-            // Surcharge de la méthode paintComponent pour dessiner l'image de fond
             @Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g);  // Appelle la méthode parente pour garantir que le panneau est correctement dessiné
+                super.paintComponent(g);
                 if (imageDeFond != null) {
-                    g.drawImage(imageDeFond, 0, 0, getWidth(), getHeight(), this);  // Redimensionne l'image pour couvrir tout le panneau
+                    g.drawImage(imageDeFond, 0, 0, getWidth(), getHeight(), this);
                 }
             }
         };
-        panel.setLayout(null); // Layout nul pour positionner manuellement les composants
-        add(panel); // Ajoute le panneau à la fenêtre
-        
+        panel.setLayout(null);
+        add(panel);
+
         // Bouton pour jouer seul
-        JButton boutonSolo = new JButton("Jouer seul");
-        boutonSolo.setBounds(530, 490, 200, 40);
-        panel.add(boutonSolo);
+        JButton soloButton = new JButton("Jouer seul");
+        soloButton.setBounds(530, 490, 200, 40);
+        panel.add(soloButton);
 
         // Bouton pour jouer en multijoueur
-        JButton boutonMultijoueur = new JButton("Multijoueur");
-        boutonMultijoueur.setBounds(530, 540, 200, 40);
-        panel.add(boutonMultijoueur);
+        JButton multiplayerButton = new JButton("Multijoueur");
+        multiplayerButton.setBounds(530, 540, 200, 40);
+        panel.add(multiplayerButton);
 
-        // Bouton pour les règles
-        JButton boutonRegles = new JButton("Règles");
-        boutonRegles.setBounds(530, 590, 200, 40);
-        panel.add(boutonRegles);
+        // Bouton pour ouvrir les règles
+        JButton rulesButton = new JButton("Règles");
+        rulesButton.setBounds(530, 590, 200, 40);
+        panel.add(rulesButton);
 
         // Action du bouton "Jouer seul"
-        boutonSolo.addActionListener(new ActionListener() {
+        soloButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Ouvre le jeu pour un joueur
-                setVisible(false); // Ferme le menu
-                new FenetreDeJeu().setVisible(true); // Ouvre la fenêtre du jeu
+                demanderPseudoEtJouer(false); // Appelle une méthode pour demander le pseudo
             }
         });
 
         // Action du bouton "Multijoueur"
-        /*boutonMultijoueur.addActionListener(new ActionListener() {
+        multiplayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Ouvre le jeu en multijoueur
-                setVisible(false);
-                new FenetreDeJeuMultijoueur().setVisible(true); // Supposons que vous ayez une classe pour le multijoueur
+                demanderPseudoEtJouer(true); // Appelle une méthode pour demander le pseudo
             }
-        });*/
+        });
 
         // Action du bouton "Règles"
-        boutonRegles.addActionListener(new ActionListener() {
+        rulesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Affiche les règles du jeu
                 JOptionPane.showMessageDialog(Menu.this, "Règles du jeu:\n\nL'objectif est de pêcher le maximum de poissons dans le temps imparti !\n\nPour vous déplacer, appuyez sur :\n" + //
                                         "Flèche droite pour se déplacer vers la droite\n" + //
                                         "Flèche gauche pour se déplacer vers la gauche\n" + //
@@ -91,11 +86,32 @@ public class Menu extends JFrame {
         });
 
         // Centre la fenêtre et la rend visible
-        setLocationRelativeTo(null);  
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
+    /**
+     * Méthode pour demander le pseudo et démarrer le jeu
+     */
+    private void demanderPseudoEtJouer(boolean isMultijoueur) {
+        this.pseudo = JOptionPane.showInputDialog(Menu.this, "Entrez votre pseudo :", "Pseudo", JOptionPane.QUESTION_MESSAGE);
+
+        if (pseudo == null || pseudo.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(Menu.this, "Veuillez entrer un pseudo avant de continuer.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (isMultijoueur) {
+                JOptionPane.showMessageDialog(Menu.this, "Mode Multijoueur pas encore disponible.", "Information", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                setVisible(false);
+                new FenetreDeJeu().setVisible(true);
+            }
+        }
+    }
+    public String getPseudo() {
+        return pseudo;
+    }
+
     public static void main(String[] args) {
-        new Menu();  // Lance la fenêtre du menu
+        new Menu();
     }
 }

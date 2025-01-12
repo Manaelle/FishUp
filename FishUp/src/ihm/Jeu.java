@@ -4,6 +4,7 @@
  */
 package ihm;
 
+import ihm.Menu;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -69,9 +70,11 @@ public class Jeu {
 
         contexte.setFont(new Font("Arial", Font.BOLD, 24));
         contexte.setColor(Color.WHITE);
+
         String textTemps = "Temps restant : " + (tempsRestant / 1000) + " s";
         contexte.drawString(textTemps, 900, 50);
         contexte.setFont(contexte.getFont().deriveFont(18f));
+
         String textScore = "Score Actuel : " + (score);
         contexte.drawString(textScore, 900, 80);
 

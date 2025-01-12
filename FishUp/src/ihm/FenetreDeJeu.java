@@ -136,11 +136,6 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
     public int getTempsRestant() {
         return this.tempsRestant;
     }
-    
-    public static void main(String[] args) {
-        FenetreDeJeu fenetre = new FenetreDeJeu();
-        fenetre.setVisible(true);
-    }
 
     // Méthode pour afficher le message de fin de jeu
     private void afficherMessageFinDeJeu(int score){
