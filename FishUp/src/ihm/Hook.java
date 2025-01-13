@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ihm;
 
-/**
- *
- * @author tpereira
- */
+import moteur.Entite;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -15,27 +8,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-/**
- *
- * @author tpereira
- */
-public class Hook {
-    
+public class Hook extends Entite {
+
     protected BufferedImage sprite;
-    protected double x, y;
     private boolean toucheGauche;
     private boolean toucheDroite;
     private boolean toucheHaut;
     private boolean toucheBas;
 
     public Hook() {
+        super(600, 400);
         try {
             this.sprite = ImageIO.read(getClass().getResource("../resources/hook_bleu.png"));
         } catch (IOException ex) {
-            Logger.getLogger(Pike.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.x = 600;
-        this.y = 400;
         this.toucheGauche = false;
         this.toucheDroite = false;
         this.toucheHaut = false;
@@ -44,58 +31,51 @@ public class Hook {
 
     public void miseAJour() {
         if (this.toucheGauche) {
-            x -= 8;
+            setAbscisse((int) (getAbscisse() - 8));
         }
         if (this.toucheDroite) {
-            x += 8;
+            setAbscisse((int) (getAbscisse() + 8));
         }
         if (this.toucheHaut) {
-            y += 8;
+            setOrdonnee((int) (getOrdonnee() - 8));
         }
         if (this.toucheBas) {
-            y -= 8;
+            setOrdonnee((int) (getOrdonnee() + 8));
         }
-        if (x > 1184 - sprite.getWidth()) { // collision avec le bord droit de la scene
-            x = 1184 - sprite.getWidth() ;
+        if (getAbscisse() > 1184 - sprite.getWidth()) {
+            setAbscisse(1184 - sprite.getWidth());
         }
-        if (x < 96) { // collision avec le bord gauche de la scene
-            x = 96;
+        if (getAbscisse() < 96) {
+            setAbscisse(96);
         }
-        if (y > 800 - sprite.getWidth()) { // collision avec le bord haut de la scene
-            y = 800 - sprite.getWidth() ;
+        if (getOrdonnee() > 800 - sprite.getWidth()) {
+            setOrdonnee(800 - sprite.getWidth());
         }
-        if (y < 96) { // collision avec le bord bas de la scene
-            y = 96;
+        if (getOrdonnee() < 96) {
+            setOrdonnee(96);
         }
     }
 
     public void rendu(Graphics2D contexte) {
-        contexte.drawImage(this.sprite, (int) x, (int) y, null);
+        contexte.drawImage(this.sprite, (int) getAbscisse(), (int) getOrdonnee(), null);
     }
 
     public void setGauche(boolean gauche) {
         this.toucheGauche = gauche;
-}
-    public void setDroite(boolean droite) {
-        this.toucheDroite = droite;
-}
-    
-    public void setHaut(boolean haut) {
-        this.toucheBas = haut;
-}
-    
-    public void setBas(boolean bas) {
-        this.toucheHaut = bas;
-}
-    
-    public double getX() {
-        return x;
     }
 
-    public double getY() {
-        return y;
+    public void setDroite(boolean droite) {
+        this.toucheDroite = droite;
     }
-    
+
+    public void setHaut(boolean haut) {
+        this.toucheHaut = haut;
+    }
+
+    public void setBas(boolean bas) {
+        this.toucheBas = bas;
+    }
+
     public double getLargeur() {
         return sprite.getHeight();
     }
@@ -103,6 +83,4 @@ public class Hook {
     public double getHauteur() {
         return sprite.getWidth();
     }
-
-    
 }

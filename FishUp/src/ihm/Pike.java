@@ -1,48 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ihm;
 
-/**
- *
- * @author tpereira
- */
-
-import ihm.Hook;
+import moteur.Entite;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import java.util.Random;
 
-/**
- * Exemple de classe lutin
- *
- * @author guillaume.laurent
- */
-public class Pike {
+public class Pike extends Entite {
 
-    protected BufferedImage sprite;
-    protected BufferedImage noirFishD;
-    protected BufferedImage orangeFishD;
-    protected BufferedImage rougeFishD;
-    protected BufferedImage roseFishD;
-    protected BufferedImage vertFishD;
-    protected BufferedImage noirFishG;
-    protected BufferedImage orangeFishG;
-    protected BufferedImage rougeFishG;
-    protected BufferedImage roseFishG;
-    protected BufferedImage vertFishG;  
-    protected double x, y;
-    protected boolean sens;
-    protected int fishType;
+    private BufferedImage sprite;
+    private BufferedImage noirFishD, orangeFishD, rougeFishD, roseFishD, vertFishD;
+    private BufferedImage noirFishG, orangeFishG, rougeFishG, roseFishG, vertFishG;
+    private boolean sens; // Direction du mouvement: true = droite, false = gauche
+    private int fishType;
 
     public Pike() {
+        super(0, 0); // Initialise les coordonnées à (0, 0) via Entite
         Random rand = new Random();
         try {
+            // Chargement des images
             this.noirFishD = ImageIO.read(getClass().getResource("../resources/poisson_noirD.png"));
             this.orangeFishD = ImageIO.read(getClass().getResource("../resources/poisson_orangeD.png"));
             this.roseFishD = ImageIO.read(getClass().getResource("../resources/poisson_roseD.png"));
@@ -53,124 +32,85 @@ public class Pike {
             this.roseFishG = ImageIO.read(getClass().getResource("../resources/poisson_roseG.png"));
             this.rougeFishG = ImageIO.read(getClass().getResource("../resources/poisson_rougeG.png"));
             this.vertFishG = ImageIO.read(getClass().getResource("../resources/poisson_vertG.png"));
-            
-            
+
+            // Initialisation des propriétés aléatoires
             this.fishType = rand.nextInt(5);
-            this.sens = rand.nextBoolean();   
-            if (sens){    
-                switch(this.fishType){
-                    case 0: this.sprite = noirFishD; break;
-                    case 1: this.sprite = orangeFishD; break;
-                    case 2: this.sprite = roseFishD; break;
-                    case 3: this.sprite = rougeFishD; break;
-                    case 4: this.sprite = vertFishD; break;
-                }
-            }
-            else{
-                switch(this.fishType){
-                    case 0: this.sprite = noirFishG; break;
-                    case 1: this.sprite = orangeFishG; break;
-                    case 2: this.sprite = roseFishG; break;
-                    case 3: this.sprite = rougeFishG; break;
-                    case 4: this.sprite = vertFishG; break;
-                }
-            }
+            this.sens = rand.nextBoolean();
+            sensPoisson();
+            lancer(); // Position initiale
         } catch (IOException ex) {
-            Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Pike.class.getName()).log(Level.SEVERE, null, ex);
         }
-        lancer();
     }
 
-    public void sensPoisson(){
-        //try {
-            if (sens){
-                switch(this.fishType){
-                    case 0: this.sprite = noirFishD; break;
-                    case 1: this.sprite = orangeFishD; break;
-                    case 2: this.sprite = roseFishD; break;
-                    case 3: this.sprite = rougeFishD; break;
-                    case 4: this.sprite = vertFishD; break;
-                }
+    private void sensPoisson() {
+        if (sens) { // Poisson vers la droite
+            switch (this.fishType) {
+                case 0 -> this.sprite = noirFishD;
+                case 1 -> this.sprite = orangeFishD;
+                case 2 -> this.sprite = roseFishD;
+                case 3 -> this.sprite = rougeFishD;
+                case 4 -> this.sprite = vertFishD;
             }
-            else{
-                switch(this.fishType){
-                    case 0: this.sprite = noirFishG; break;
-                    case 1: this.sprite = orangeFishG; break;
-                    case 2: this.sprite = roseFishG; break;
-                    case 3: this.sprite = rougeFishG; break;
-                    case 4: this.sprite = vertFishG; break;
-                }
+        } else { // Poisson vers la gauche
+            switch (this.fishType) {
+                case 0 -> this.sprite = noirFishG;
+                case 1 -> this.sprite = orangeFishG;
+                case 2 -> this.sprite = roseFishG;
+                case 3 -> this.sprite = rougeFishG;
+                case 4 -> this.sprite = vertFishG;
             }
-            
-        //} catch (IOException ex) {
-            //Logger.getLogger(Hook.class.getName()).log(Level.SEVERE, null, ex);
-        
+        }
     }
-    
+
     public void miseAJour() {
-        if (x >= 1088){
+        if (getAbscisse() >= 1088) { // Bords droits
             this.sens = false;
             sensPoisson();
-        }
-        else if (x <= 96){
+        } else if (getAbscisse() <= 96) { // Bords gauches
             this.sens = true;
             sensPoisson();
         }
-        if(this.sens){
-            switch(this.fishType){
-                case 0: x = x + 5; break;
-                case 1: x = x + 10; break;
-                case 2: x = x + 13; break;
-                case 3: x = x + 15; break;
-                case 4: x = x + 20; break;
-            }
-        }
-        else{
-            switch(this.fishType){
-                case 0: x = x - 5; break;
-                case 1: x = x - 10; break;
-                case 2: x = x - 13; break;
-                case 3: x = x - 15; break;
-                case 4: x = x - 20; break;
-            }
+
+        int vitesse = switch (this.fishType) {
+            case 0 -> 5;
+            case 1 -> 10;
+            case 2 -> 13;
+            case 3 -> 15;
+            case 4 -> 20;
+            default -> 5;
+        };
+
+        if (this.sens) {
+            Move(vitesse, 0); // Déplacement vers la droite
+        } else {
+            Move(-vitesse, 0); // Déplacement vers la gauche
         }
     }
 
     public void rendu(Graphics2D contexte) {
-        contexte.drawImage(this.sprite, (int) x, (int) y, null);
-        //contexte.drawImage(this.blueFish, (int) x, (int) y, null);
+        contexte.drawImage(this.sprite, (int) getAbscisse(), (int) getOrdonnee(), null);
     }
 
     public void lancer() {
         Random rand = new Random();
-        this.y = 96 + Math.random() * (704-sprite.getWidth());
-        this.fishType = rand.nextInt(5);
-        if(this.sens){
-            this.x = 96;
-        }
-        else{
-            this.x = 1088;
+        setOrdonnee(96 + rand.nextInt(704 - this.sprite.getWidth())); // Position aléatoire en hauteur
+        if (this.sens) {
+            setAbscisse(96); // Position initiale à gauche
+        } else {
+            setAbscisse(1088); // Position initiale à droite
         }
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-    
     public int getFishType() {
         return fishType;
     }
 
     public double getLargeur() {
-        return sprite.getHeight();
-    }
-
-    public double getHauteur() {
         return sprite.getWidth();
     }
 
+    public double getHauteur() {
+        return sprite.getHeight();
+    }
 }

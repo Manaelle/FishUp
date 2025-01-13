@@ -12,7 +12,7 @@ public class Entite {           // Class that controls movements in the game win
     private int x;
     private int y;
 
-    public void Entite(int x, int y) {    
+    public Entite(int x, int y) {    
         this.x = x;
         this.y = y;
     }
@@ -27,7 +27,7 @@ public class Entite {           // Class that controls movements in the game win
     public void Move(int dx, int dy){
         this.x += dx;
         this.y += dy;
-        System.out.println("Moved to position: (" + x + ", " + y + ")");
+        //System.out.println("Moved to position: (" + x + ", " + y + ")");
     }
     public double getAbscisse() {
         return x;

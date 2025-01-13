@@ -13,8 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-import moteur.Joueur;
-
 public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener {
 
     private BufferedImage framebuffer;
@@ -50,7 +48,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         
         // Configuration du temps pour le compte à rebours (5 secondes)
         this.tempoCountDown = 5;
-        this.tempsRestant = 100 * 1000; // Temps de jeu, par exemple, 100 secondes
+        this.tempsRestant = 40 * 1000; // Temps de jeu, par exemple, 100 secondes
 
         // Ajout du listener pour le clavier
         this.addKeyListener(this);

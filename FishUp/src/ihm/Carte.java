@@ -7,7 +7,6 @@ package ihm;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,12 +19,8 @@ import javax.imageio.ImageIO;
  */
 public class Carte {
 
-    private int largeur = 40;
-    private int hauteur = 25;
     private int tailleTuile = 32;
     private BufferedImage[] tuiles;
-    
-    private BufferedImage uneTuile;
     
     private int [][] decor = {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} ,
@@ -60,7 +55,6 @@ public class Carte {
         tuiles = new BufferedImage[176];
         try {
             BufferedImage tileset = ImageIO.read(getClass().getResource("/resources/tileSetMinecraft32x32.png"));
-            uneTuile = tileset.getSubimage(64, 32, tailleTuile, tailleTuile);
             for (int i = 0; i < tuiles . length ; i ++) {
                 int x = (i % 16) * tailleTuile;
                 int y = (i / 16) * tailleTuile;
